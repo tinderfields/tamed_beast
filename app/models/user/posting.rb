@@ -15,7 +15,6 @@ class User
 
   def reply(topic, body)
     returning topic.posts.build(:body => body) do |post|
-      post.site  = topic.site
       post.forum = topic.forum
       post.user  = self
       post.save

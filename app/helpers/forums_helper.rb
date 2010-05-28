@@ -17,7 +17,7 @@ module ForumsHelper
   
   # Ripe for optimization
   def voice_count
-    pluralize current_site.topics.to_a.sum { |t| t.voice_count }, 'voice'
+    pluralize Topic.all.to_a.sum { |t| t.voice_count }, 'voice'
   end
 
 end

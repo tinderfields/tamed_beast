@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
   concerned_with :states, :activation, :posting, :validation
   formats_attributes :bio
 
-  belongs_to :site, :counter_cache => true
-  validates_presence_of :site_id
   
   has_many :posts, :order => "#{Post.table_name}.created_at desc"
   has_many :topics, :order => "#{Topic.table_name}.created_at desc"
@@ -18,13 +16,17 @@ class User < ActiveRecord::Base
   has_many :monitorships, :dependent => :delete_all
   has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
   
-  has_permalink :login, :scope => :site_id
+  has_permalink :login
   
   attr_readonly :posts_count, :last_seen_at
 
   named_scope :named_like, lambda {|name|
     { :conditions => ["users.display_name like ? or users.login like ?", 
-                        "#{name}%", "#{name}%"] }}
+                        "#{name}%", "#{name}%"] }}            
+                        
+  def self.active
+     find_all_by_state('active')
+  end
 
   def self.prefetch_from(records)
     find(:all, :select => 'distinct *', :conditions => ['id in (?)', records.collect(&:user_id).uniq])
@@ -35,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def available_forums
-    @available_forums ||= site.ordered_forums - forums
+    @available_forums ||= Forum.ordered - forums
   end
 
   def moderator_of?(forum)

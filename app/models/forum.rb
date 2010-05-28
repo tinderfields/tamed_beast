@@ -5,8 +5,6 @@ class Forum < ActiveRecord::Base
 
   validates_presence_of :name
   
-  belongs_to :site
-  
   has_permalink :name
   
   attr_readonly :posts_count, :topics_count

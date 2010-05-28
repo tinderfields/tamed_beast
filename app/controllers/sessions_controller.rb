@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   protected
   
   def password_authentication(name, password)
-    if @current_user = current_site.users.authenticate(name, password)
+    if @current_user = User.all.authenticate(name, password)
       successful_login
     else
       failed_login I18n.t('txt.invalid_login', :default => "Invalid login")
@@ -45,7 +45,6 @@ class SessionsController < ApplicationController
           @user.login = openid_url
           @user.email = registration['email']
           @user.password = 123456
-          @user.site = Site.find(:first)
           @user.display_name = registration['nickname']
           @user.save(false)
         end

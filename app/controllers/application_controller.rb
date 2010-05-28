@@ -13,11 +13,6 @@ class ApplicationController < ActionController::Base
   
   # Filter password parameter from logs
   filter_parameter_logging :password
-
-  # raised in #current_site
-  rescue_from Site::UndefinedError do |e|
-    redirect_to new_site_path
-  end
   
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i

@@ -17,9 +17,6 @@ class Topic < ActiveRecord::Base
   belongs_to :last_user, :class_name => "User"
   
   belongs_to :forum, :counter_cache => true
-  
-  # forum's site, set by callback
-  belongs_to :site, :counter_cache => true
 
   has_many :posts,       :order => "#{Post.table_name}.created_at", :dependent => :delete_all
   has_one  :recent_post, :order => "#{Post.table_name}.created_at DESC", :class_name => "Post"
@@ -29,7 +26,7 @@ class Topic < ActiveRecord::Base
   has_many :monitorships, :dependent => :delete_all
   has_many :monitoring_users, :through => :monitorships, :source => :user, :conditions => {"#{Monitorship.table_name}.active" => true}
   
-  validates_presence_of :user_id, :site_id, :forum_id, :title
+  validates_presence_of :user_id, :forum_id, :title
   validates_presence_of :body, :on => :create
 
   attr_accessor :body
@@ -80,7 +77,6 @@ protected
   end
   
   def set_default_attributes
-    self.site_id           = forum.site_id if forum_id
     self.sticky          ||= 0
     self.last_updated_at ||= Time.now.utc
   end
@@ -104,7 +100,6 @@ protected
   
   def update_cached_forum_and_user_counts
     Forum.update_all "posts_count = posts_count - #{posts_count}", ['id = ?', forum_id]
-    Site.update_all  "posts_count = posts_count - #{posts_count}", ['id = ?', site_id]
     @user_posts.each do |user_id, posts|
       User.update_all "posts_count = posts_count - #{posts.size}", ['id = ?', user_id]
     end

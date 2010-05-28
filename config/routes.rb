@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
     :controller => "sessions", :action => "create",
     :requirements => { :method => :get }
 
-  map.resources :sites, :moderatorships, :monitorship
+  map.resources :moderatorships, :monitorship
   
 
   map.resources :forums, :has_many => :posts do |forum|

@@ -9,10 +9,11 @@ class UsersController < ApplicationController
 
   def index
     users_scope = admin? ? :all_users : :users
+    # Change User with User.send(users_scope)
     if params[:q]
-      @users = current_site.send(users_scope).named_like(params[:q]).paginate(:page => current_page)
+      @users = User.named_like(params[:q]).paginate(:page => current_page)
     else
-      @users = current_site.send(users_scope).paginate(:page => current_page)
+      @users = User.all.paginate(:page => current_page)
     end
   end
 
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    @user = current_site.users.build(params[:user])    
+    @user = User.new(params[:user])    
     @user.save if @user.valid?
     @user.register! if @user.valid?
     unless @user.new_record?
@@ -36,7 +37,6 @@ class UsersController < ApplicationController
 
   def settings
     @user = current_user
-    current_site
     render :action => "edit"
   end
   
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 
   def activate
     # not sure why this was using a symbol. Let's use the real false.
-    self.current_user = params[:activation_code].blank? ? false : current_site.all_users.find_in_state(:first, :pending, :conditions => {:activation_code => params[:activation_code]})
+    self.current_user = params[:activation_code].blank? ? false : User.all.find_in_state(:first, :pending, :conditions => {:activation_code => params[:activation_code]})
     if logged_in?
       current_user.activate!
       flash[:notice] = "Signup complete!"
@@ -101,11 +101,11 @@ class UsersController < ApplicationController
 protected
   def find_user
     @user = if admin?
-      current_site.all_users.find params[:id]
+      User.find params[:id]
     elsif params[:id] == current_user.id
       current_user
     else
-      current_site.users.find params[:id]
+      User.active.find params[:id]
     end or raise ActiveRecord::RecordNotFound
   end
 
