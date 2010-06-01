@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-  before_filter :forum_admin_required, :except => [:index, :show]
+  # before_filter :forum_admin_required, :except => [:index, :show]
 
   # GET /forums
   # GET /forums.xml

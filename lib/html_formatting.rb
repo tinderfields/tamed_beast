@@ -1,4 +1,4 @@
-require 'redcloth'
+# require 'redcloth'
 module HtmlFormatting
   protected
   
