@@ -107,7 +107,7 @@ class TamedBeastTables < ActiveRecord::Migration
     #   t.datetime "last_seen_at" 
     #   t.integer  "posts_count",                             :default => 0       
     #   
-    #   t.boolean  "admin",                                   :default => false    
+    #   t.boolean  "forum_admin",                                   :default => false    
     #   t.text     "bio_html"
     #   t.string   "website"
     #   t.string   "bio"
@@ -119,10 +119,22 @@ class TamedBeastTables < ActiveRecord::Migration
     #   
     # 
     # end    
+    add_column :users, :state, :string, :default => "passive"
+    add_column :users, :deleted_at, :datetime
+    add_column :users, :last_seen_at, :datetime
+    add_column :users, :posts_count, :integer, :default => 0
+    add_column :users, :forum_admin, :boolean, :default => false
+    add_column :users, :bio_html, :text
+    add_column :users, :website, :string
+    add_column :users, :bio, :string
+    add_column :users, :display_name, :string
+    add_column :users, :permalink, :string
+    
 
     add_index "users", ["last_seen_at"], :name => "index_users_on_last_seen_at"
     add_index "users", ["permalink"], :name => "index_users_on_permalink"
-    add_index "users", ["posts_count"], :name => "index_users_on_posts_count"
+    add_index "users", ["posts_count"], :name => "index_users_on_posts_count"   
+  end
 
   def self.down
   end

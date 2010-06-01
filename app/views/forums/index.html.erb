@@ -6,9 +6,9 @@
   <%= I18n.t 'txt.sidebar.beast_desc', :default => "A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we're done." %>
 </p>
 
-<% if admin? %>
-<h6><%= I18n.t 'txt.admin.title', :default => 'Admin' %></h6>
-<p><%= link_to I18n.t('txt.admin.create_new_forum', :default => 'Create New Forum'), new_forum_path, :class => "utility" %></p>
+<% if forum_admin? %>
+<h6><%= I18n.t 'txt.forum_admin.title', :default => 'forum_admin' %></h6>
+<p><%= link_to I18n.t('txt.forum_admin.create_new_forum', :default => 'Create New Forum'), new_forum_path, :class => "utility" %></p>
 <% end %>
 
 <% end %>
@@ -44,7 +44,7 @@
       <p class="desc"><%= forum.description_html %></p>
     </td>
     <td class="c3">
-      <%= link_to I18n.t('txt.edit', :default => 'Edit'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
+      <%= link_to I18n.t('txt.edit', :default => 'Edit'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if forum_admin? %>
     </td>
 
     <td class="inv lp">

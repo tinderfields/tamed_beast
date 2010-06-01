@@ -5,7 +5,7 @@ authentication:
 * Login / logout
 * Secure password handling
 * Account activation by validating email
-* Account approval / disabling by admin
+* Account approval / disabling by forum_admin
 * Rudimentary hooks for authorization and access control.
 
 Several features were updated in May, 2008.  

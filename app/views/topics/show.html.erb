@@ -89,10 +89,10 @@
 
     <%= avatar_for post.user %>
     <span class="fn"><%= link_to truncate(h(post.user.display_name), :length => 15), user_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
-    <% if post.user.admin? || post.forum.moderators.include?(post.user) || !post.user.active? %>
-    <span class="admin">
-      <% if post.user.admin? %>
-        <%= I18n.t 'txt.user_is_administrator', :default => 'Administator' %>
+    <% if post.user.forum_admin? || post.forum.moderators.include?(post.user) || !post.user.active? %>
+    <span class="forum_admin">
+      <% if post.user.forum_admin? %>
+        <%= I18n.t 'txt.user_is_forum_administrator', :default => 'forum_administator' %>
       <% elsif post.forum.moderators.include?(post.user) %>
         <%= I18n.t 'txt.user_is_moderator', :default => 'Moderator' %>
       <% elsif post.user.suspended? %>
@@ -107,7 +107,7 @@
     <p>
       <span class="edit">
         <%= ajax_spinner_for "edit-post-#{post.id}", "spinner_bounce.gif" %>
-				<%= link_to I18n.t('txt.admin.edit_post', :default => 'Edit post'), edit_forum_topic_post_path(@forum, @topic, post, :page => current_page), :class => 'utility' %>
+				<%= link_to I18n.t('txt.forum_admin.edit_post', :default => 'Edit post'), edit_forum_topic_post_path(@forum, @topic, post, :page => current_page), :class => 'utility' %>
       </span>
     </p>
     <% end -%>

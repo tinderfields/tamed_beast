@@ -8,7 +8,7 @@ describe ForumsController, "GET #index" do
   before do
     login_as :default
     current_site :default
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
     session[:forums_page] = {1 => 5}
     @forum_time = session[:forums] = {1 => 5.minutes.ago.utc}
   end
@@ -70,7 +70,7 @@ describe ForumsController, "GET #new" do
   before do
     login_as :default
     current_site :default
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
   end
 
   it "assigns @forum" do
@@ -96,7 +96,7 @@ describe ForumsController, "GET #edit" do
     login_as :default
     current_site :default
     @forum  = forums(:default) 
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
   end
 
   it_assigns :forum
@@ -108,7 +108,7 @@ describe ForumsController, "POST #create" do
     @attributes = {'name' => "Default"}
     current_site :default
     login_as :default
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
   end
   
   describe ForumsController, "(successful creation)" do
@@ -150,7 +150,7 @@ describe ForumsController, "PUT #update" do
     current_site :default
     @attributes = {'name' => "Default"}
     @forum      = forums(:default)
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
   end
   
   describe ForumsController, "(successful save)" do
@@ -194,7 +194,7 @@ describe ForumsController, "DELETE #destroy" do
     login_as :default
     current_site :default
     @forum      = forums(:default)
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
   end
 
   it_assigns :forum

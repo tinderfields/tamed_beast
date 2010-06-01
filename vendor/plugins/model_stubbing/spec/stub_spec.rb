@@ -16,12 +16,12 @@ module ModelStubbing
     end
   
     it "has the default stub's attributes" do
-      @user.attributes.should == {:name => 'bob', :admin => false}
-      @post.attributes.should == {:title => 'initial', :user => @users.stubs[:admin], :published_at => @definition.current_time + 5.days}
+      @user.attributes.should == {:name => 'bob', :forum_admin => false}
+      @post.attributes.should == {:title => 'initial', :user => @users.stubs[:forum_admin], :published_at => @definition.current_time + 5.days}
     end
   
     it "#with returns merged attributes" do
-      @post.with(:title => 'fred').should == {:title => 'fred', :user => @users.stubs[:admin].record, :published_at => @definition.current_time + 5.days}
+      @post.with(:title => 'fred').should == {:title => 'fred', :user => @users.stubs[:forum_admin].record, :published_at => @definition.current_time + 5.days}
     end
   
     it "#only returns only given keys" do
@@ -29,11 +29,11 @@ module ModelStubbing
     end
   
     it "#except returns other keys" do
-      @post.except(:published_at).should == {:title => 'initial', :user => @users.stubs[:admin].record}
+      @post.except(:published_at).should == {:title => 'initial', :user => @users.stubs[:forum_admin].record}
     end
   
     it "merges named stub attributes with default attributes" do
-      @users.stubs[:admin].attributes.should == {:name => 'bob', :admin => true}
+      @users.stubs[:forum_admin].attributes.should == {:name => 'bob', :forum_admin => true}
     end
   
     it "sets default model stubs in the definition's global stubs" do
@@ -41,7 +41,7 @@ module ModelStubbing
     end
   
     it "sets custom model stubs in the defintion's global stub with stub name prefix" do
-      @definition.stubs[:admin_model_stubbing_user].should == @users.stubs[:admin]
+      @definition.stubs[:forum_admin_model_stubbing_user].should == @users.stubs[:forum_admin]
     end
   end
 
@@ -140,12 +140,12 @@ module ModelStubbing
     it "sets correct attributes" do
       @record  = @stub.record
       @record.name.should  == 'bob'
-      @record.admin.should == false
+      @record.forum_admin.should == false
     end
   
     it "allows custom attributes during instantiation" do
-      @record  = @stub.record :admin => true
-      @record.admin.should == true
+      @record  = @stub.record :forum_admin => true
+      @record.forum_admin.should == true
     end
   
     it "allows use of #current_time in a stub" do
@@ -239,12 +239,12 @@ module ModelStubbing
     it "sets correct attributes" do
       @record  = @stub.record(:id => :new)
       @record.name.should  == 'bob'
-      @record.admin.should == false
+      @record.forum_admin.should == false
     end
   
     it "allows custom attributes during instantiation" do
-      @record  = @stub.record :admin => true, :id => :new
-      @record.admin.should == true
+      @record  = @stub.record :forum_admin => true, :id => :new
+      @record.forum_admin.should == true
     end
   
     it "allows use of #current_time in a stub" do
@@ -258,7 +258,7 @@ module ModelStubbing
       @users      = @definition.models[:model_stubbing_users]
       @posts      = @definition.models[:model_stubbing_posts]
       @tags       = @definition.models[:model_stubbing_tags]
-      @user       = @users.stubs[:admin]
+      @user       = @users.stubs[:forum_admin]
       @post       = @posts.default
       @nice_one   = @posts.stubs[:nice_one]
       @tag_foo    = @tags.stubs[:foo]

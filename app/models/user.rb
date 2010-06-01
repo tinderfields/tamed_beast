@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def moderator_of?(forum)
-    !!(admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
+    !!(forum_admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
   end
 
   def display_name
@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   
   def to_xml(options = {})
     options[:except] ||= []
-    options[:except] << :email << :login_key << :login_key_expires_at << :password_hash << :openid_url << :activated << :admin
+    options[:except] << :email << :login_key << :login_key_expires_at << :password_hash << :openid_url << :activated << :forum_admin
     super
   end
 

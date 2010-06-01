@@ -60,18 +60,18 @@ describe UsersController do
     flash[:notice].should be_nil
   end
   
-  it 'activates the first user as admin' do
+  it 'activates the first user as forum_admin' do
     User.delete_all
     create_user
     user = User.find_by_login('quire')
     user.register!
     user.activate!
     user.active?.should == true
-    user.admin?.should == true
+    user.forum_admin?.should == true
   end
   
   it "sends an email to the user on create" do
-    create_user :login => "admin", :email => "admin@example.com"
+    create_user :login => "forum_admin", :email => "forum_admin@example.com"
     response.should be_redirect
     lambda{ create_user }.should change(ActionMailer::Base.deliveries, :size).by(1)
   end
@@ -121,29 +121,29 @@ describe UsersController, "GET #index" do
   end
 end
 
-describe UsersController, "PUT #make_admin" do
+describe UsersController, "PUT #make_forum_admin" do
   before do
-    login_as :admin
+    login_as :forum_admin
     current_site :default
     @attributes = {'login' => "Default"}
   end
   
-  describe UsersController, "(as admin, successful)" do
+  describe UsersController, "(as forum_admin, successful)" do
     define_models :users
 
-    it "sets admin" do
+    it "sets forum_admin" do
       user = users(:default)
-      user.admin.should be_false
-      put :make_admin, :id => users(:default).id, :user => { :admin => "1" }
-      user.reload.admin.should be_true
+      user.forum_admin.should be_false
+      put :make_forum_admin, :id => users(:default).id, :user => { :forum_admin => "1" }
+      user.reload.forum_admin.should be_true
     end
     
-    it "unsets admin" do
+    it "unsets forum_admin" do
       user = users(:default)
-      user.update_attribute :admin, true
-      user.admin.should be_true
-      put :make_admin, :id => users(:default).id, :user => { }
-      user.reload.admin.should be_false
+      user.update_attribute :forum_admin, true
+      user.forum_admin.should be_true
+      put :make_forum_admin, :id => users(:default).id, :user => { }
+      user.reload.forum_admin.should be_false
     end
   end
 end

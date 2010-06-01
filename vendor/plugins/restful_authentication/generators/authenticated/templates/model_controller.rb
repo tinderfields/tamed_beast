@@ -2,8 +2,8 @@ class <%= model_controller_class_name %>Controller < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   <% if options[:stateful] %>
-  # Protect these actions behind an admin login
-  # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
+  # Protect these actions behind an forum_admin login
+  # before_filter :forum_admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
   before_filter :find_<%= file_name %>, :only => [:suspend, :unsuspend, :destroy, :purge]
   <% end %>
 
@@ -31,7 +31,7 @@ class <%= model_controller_class_name %>Controller < ApplicationController
       <% end -%>redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an forum_admin (link is above)."
       render :action => 'new'
     end
   end

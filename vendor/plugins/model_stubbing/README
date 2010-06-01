@@ -36,27 +36,27 @@ a different approach.  Oh, and apparently this is an implementation of the Objec
       end
     
       model User do
-        stub :name => 'bob', :admin => false
-        stub :admin, :admin => true # inherits from default fixture
+        stub :name => 'bob', :forum_admin => false
+        stub :forum_admin, :forum_admin => true # inherits from default fixture
         stub :author, :roles => [all_stubs(:author_role)]
         stub :owner, :roles => [all_stubs(:author_role), all_stubs(:owner_role)]
       end
     
       model Post do
-        # uses admin user fixture above
-        stub :title => 'initial', :user => all_stubs(:admin_user), 
+        # uses forum_admin user fixture above
+        stub :title => 'initial', :user => all_stubs(:forum_admin_user), 
           :published_at => current_time + 5.days
       end
     end
     
     def test_foo
       @user   = users(:default) # default user stub
-      @admin  = users(:admin)
+      @forum_admin  = users(:forum_admin)
       @custom = users(:default, :age => 25) # custom attributes, 
                                             #but not equal to @user any more
                                             
       @post   = posts(:default)
-      @post.user # equal to @admin above
+      @post.user # equal to @forum_admin above
       
       current_time # stubbed to be 6/1/2007 using mocha or rspec
     end

@@ -82,7 +82,7 @@ protected
 
   def find_post
     post = @topic.posts.find(params[:id])
-    if post.user == current_user || current_user.admin?
+    if post.user == current_user || current_user.forum_admin?
       @post = post
     else
       raise ActiveRecord::RecordNotFound

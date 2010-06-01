@@ -169,23 +169,23 @@ describe User, "with no created users" do
     user
   end
   
-  it 'creates initial user as an admin' do
+  it 'creates initial user as an forum_admin' do
     site = Site.create! :name => "xfoo", :host => "xsite1.com"
     user = make_user(site, 'quire', 'quire@example.com')
-    user.should be_admin
+    user.should be_forum_admin
   end
   
-  it 'creates initial user as admin for each site' do
+  it 'creates initial user as forum_admin for each site' do
     site = Site.create! :name => "foo", :host => "site1.com"
 
     user1 = make_user(site, 'quire1', 'quire@example1.com')
-    user1.should be_admin
+    user1.should be_forum_admin
 
     user2 = make_user(site, 'quire2', 'quire@example2.com')
-    user2.should_not be_admin
+    user2.should_not be_forum_admin
 
     site2 = Site.create! :name => "bar", :host => "site2.com"
     user3 = make_user(site2, 'quire3', 'quire@example3.com')
-    user3.should be_admin
+    user3.should be_forum_admin
   end
 end

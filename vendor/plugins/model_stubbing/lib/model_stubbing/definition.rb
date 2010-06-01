@@ -65,13 +65,13 @@ module ModelStubbing
     # Sets up the given class for this definition.  Adds a few helper methods:
     #
     # * #stubs: Lets you access all stubs with a global key, which combines the model
-    #   name with the stub name.  stubs(:user) gets the default user stub, and stubs(:admin_user)
-    #   gets the 'admin' user stub.
+    #   name with the stub name.  stubs(:user) gets the default user stub, and stubs(:forum_admin_user)
+    #   gets the 'forum_admin' user stub.
     #
     # * #current_time: Accesses the current mocked time for a test or spec.
     #
     # Shortcut methods for each model are generated as well.  users(:default) accesses
-    # the default user stub, and users(:admin) accesses the 'admin' user stub.
+    # the default user stub, and users(:forum_admin) accesses the 'forum_admin' user stub.
     def setup_on(base, options = {}, &block)
       @options = {:validate => false, :insert => true}.update(options)
       self.insert = false if @options[:insert] == false

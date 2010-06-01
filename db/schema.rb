@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20090317123901) do
     t.datetime "last_seen_at" 
     t.integer  "posts_count",                             :default => 0       
     
-    t.boolean  "admin",                                   :default => false    
+    t.boolean  "forum_admin",                                   :default => false    
     t.text     "bio_html"
     t.string   "website"
     t.string   "bio"

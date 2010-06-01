@@ -13,7 +13,7 @@ class User
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email
   before_save :encrypt_password
-  before_create :set_first_user_as_admin
+  before_create :set_first_user_as_forum_admin
   # validates_email_format_of :email, :message=>"is invalid"  
   validates_uniqueness_of :openid_url, :case_sensitive => false, :allow_nil => true
 
@@ -53,8 +53,8 @@ protected
     crypted_password.blank? || !password.blank?
   end
   
-  def set_first_user_as_admin
-    self.admin = true if User.all.size.zero?
+  def set_first_user_as_forum_admin
+    self.forum_admin = true if User.all.size.zero?
   end
   
   def normalize_login_and_email

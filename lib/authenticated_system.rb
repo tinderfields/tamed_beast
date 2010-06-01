@@ -22,12 +22,12 @@ module AuthenticatedSystem
       @current_user = new_user || false
     end
 
-    def admin?
-      logged_in? && current_user.admin?
+    def forum_admin?
+      logged_in? && current_user.forum_admin?
     end
     
     def moderator_of?(record)
-      return true if admin?
+      return true if forum_admin?
       return false unless logged_in?
       forum = record.respond_to?(:forum) ? record.forum : record
       current_user.moderator_of? forum
@@ -69,8 +69,8 @@ module AuthenticatedSystem
       authorized? || access_denied
     end
 
-    def admin_required
-      admin? || access_denied
+    def forum_admin_required
+      forum_admin? || access_denied
     end
 
     # Redirect as appropriate when an access request fails.
@@ -116,7 +116,7 @@ module AuthenticatedSystem
     # Inclusion hook to make #current_user and #logged_in?
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_user, :logged_in?, :current_site, :admin?, :moderator_of? if base.respond_to? :helper_method
+      base.send :helper_method, :current_user, :logged_in?, :current_site, :forum_admin?, :moderator_of? if base.respond_to? :helper_method
     end
 
     #

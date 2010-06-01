@@ -6,7 +6,7 @@ describe SitesController, "GET #index" do
   act! { get :index }
 
   before do
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
     @controller.stub!(:require_site)
   end
   
@@ -30,7 +30,7 @@ describe SitesController, "GET #show" do
 
   before do
     @site  = sites(:default)
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
     @controller.stub!(:require_site)
   end
   
@@ -51,7 +51,7 @@ describe SitesController, "GET #new" do
   act! { get :new }
 
   before do
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
     login_as :default
   end
 
@@ -84,7 +84,7 @@ describe SitesController, "GET #edit" do
   before do
     login_as :default
     @site  = sites(:default)
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
     @controller.stub!(:require_site)
   end
 
@@ -96,7 +96,7 @@ describe SitesController, "POST #create" do
   before do
     login_as :default
     @attributes = {:name => 'yow'}
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
   end
   
   describe SitesController, "(successful creation)" do
@@ -136,7 +136,7 @@ describe SitesController, "PUT #update" do
   before do
     login_as :default
     @site = sites(:default)
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
     @controller.stub!(:require_site)
   end
   
@@ -180,7 +180,7 @@ describe SitesController, "DELETE #destroy" do
   before do
     login_as :default
     @site = sites(:default)
-    @controller.stub!(:admin_required).and_return(true)
+    @controller.stub!(:forum_admin_required).and_return(true)
     @controller.stub!(:require_site)
   end
 

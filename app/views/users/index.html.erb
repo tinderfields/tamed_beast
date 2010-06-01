@@ -17,7 +17,7 @@
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
     <th class="la" width="88%"><%= I18n.t 'txt.views_users.name_or_login', :default => 'Name / Login' %></th>
-	<% if logged_in? && current_user.admin? -%>
+	<% if logged_in? && current_user.forum_admin? -%>
 	<th><%= I18n.t 'txt.views_users.current_status_title', :default => "Current Status" %></th>
 	<% end -%>
     <th><%= I18n.t 'txt.views_users.website_title', :default => 'Website' %></th>
@@ -25,12 +25,12 @@
   </tr>
 <% @users.each do |user|-%>  
   <tr>
-    <td><%= link_to h(user.display_name || user.login), user, :class => (user.admin? ? "admin" : nil) %>
+    <td><%= link_to h(user.display_name || user.login), user, :class => (user.forum_admin? ? "forum_admin" : nil) %>
       <span style="color:#666">
-      <%= I18n.t('txt.views_users.admin_in_parens', :default => "(admin)") if user.admin? %>
+      <%= I18n.t('txt.views_users.forum_admin_in_parens', :default => "(forum_admin)") if user.forum_admin? %>
       </span>
 	  </td>
-	<% if logged_in? && current_user.admin? -%>
+	<% if logged_in? && current_user.forum_admin? -%>
 		<td><%= user.state %></td>
 	<% end -%>
     <td class="la">

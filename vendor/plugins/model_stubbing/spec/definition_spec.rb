@@ -23,7 +23,7 @@ module ModelStubbing
     end
     
     it "retrieves stubs" do
-      @definition.retrieve_record(:admin_model_stubbing_user).should == @definition.models[:model_stubbing_users].stubs[:admin].record
+      @definition.retrieve_record(:forum_admin_model_stubbing_user).should == @definition.models[:model_stubbing_users].stubs[:forum_admin].record
     end
     
     it "keeps order of defined models" do
@@ -46,7 +46,7 @@ module ModelStubbing
     end
     
     it "retrieves stubs" do
-      @tester.stubs(:admin_model_stubbing_user).should == @definition.models[:model_stubbing_users].stubs[:admin]
+      @tester.stubs(:forum_admin_model_stubbing_user).should == @definition.models[:model_stubbing_users].stubs[:forum_admin]
     end
     
     it "retrieves default stubs with stub model method" do
@@ -54,7 +54,7 @@ module ModelStubbing
     end
     
     it "retrieves stubs with stub model method" do
-      @tester.model_stubbing_users(:admin).should == @definition.models[:model_stubbing_users].stubs[:admin].record
+      @tester.model_stubbing_users(:forum_admin).should == @definition.models[:model_stubbing_users].stubs[:forum_admin].record
     end
   end
   

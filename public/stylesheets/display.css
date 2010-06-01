@@ -617,7 +617,7 @@ table tr td.narrow { padding:2px 5px;}
 
 /* users */
 
-a.admin
+a.forum_admin
 {
 	color:#c00;
 	font-weight:bold;
@@ -754,7 +754,7 @@ table.posts tr.spacer td
 }
 
 .post .author .posts,
-.post .author .admin
+.post .author .forum_admin
 {
 	display:block;
 	font-size:0.75em;

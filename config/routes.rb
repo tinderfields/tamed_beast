@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :collection => {:search => :get}
   map.resources :users, :member => { :suspend   => :put,
                                      :settings  => :get,
-                                     :make_admin => :put,
+                                     :make_forum_admin => :put,
                                      :unsuspend => :put,
                                      :purge     => :delete },
                         :has_many => [:posts]

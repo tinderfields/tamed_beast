@@ -123,7 +123,7 @@ Reference Monitor (SecPatt p256)
 #
 # ask for permissions on arbitrary (subject, action, resource)
   * roles
-# get filtered object based on action (:public_info, :admin_info, etc.)
+# get filtered object based on action (:public_info, :forum_admin_info, etc.)
 # attach a rule to a (subject|role, action, resource) triple
   "subject should have role R"
   "subject should have role R on resource X"

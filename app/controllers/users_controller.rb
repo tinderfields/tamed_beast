@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :edit]
+  before_filter :forum_admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :edit]
   before_filter :find_user, :only => [:update, :show, :edit, :suspend, :unsuspend, :destroy, :purge]
   before_filter :login_required, :only => [:settings, :update]
 
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   # before_filter :validate_brain_buster, :only => [:create]
 
   def index
-    users_scope = admin? ? :all_users : :users
+    users_scope = forum_admin? ? :all_users : :users
     # Change User with User.send(users_scope)
     if params[:q]
       @users = User.named_like(params[:q]).paginate(:page => current_page)
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = admin? ? find_user : current_user
+    @user = forum_admin? ? find_user : current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User account was successfully updated.'
@@ -90,17 +90,17 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
   
-  def make_admin
-    redirect_back_or_default('/') and return unless admin?
+  def make_forum_admin
+    redirect_back_or_default('/') and return unless forum_admin?
     @user = find_user
-    @user.admin = (params[:user][:admin] == "1")
+    @user.forum_admin = (params[:user][:forum_admin] == "1")
     @user.save
     redirect_to @user
   end
 
 protected
   def find_user
-    @user = if admin?
+    @user = if forum_admin?
       User.find params[:id]
     elsif params[:id] == current_user.id
       current_user
@@ -110,7 +110,7 @@ protected
   end
 
   def authorized?
-    admin? || params[:id].blank? || params[:id] == current_user.id.to_s
+    forum_admin? || params[:id].blank? || params[:id] == current_user.id.to_s
   end
 
   def render_or_redirect_for_captcha_failure

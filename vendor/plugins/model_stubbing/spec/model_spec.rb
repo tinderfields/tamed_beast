@@ -12,7 +12,7 @@ module ModelStubbing
 
     it "retrieves stubs" do
       @model.retrieve_record(:default).should == @model.default.record
-      @model.retrieve_record(:admin).should   == @model.stubs[:admin].record
+      @model.retrieve_record(:forum_admin).should   == @model.stubs[:forum_admin].record
     end
   end
 

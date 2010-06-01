@@ -6,16 +6,16 @@ module ModelStubbing
 
     it "retrieves stubs" do
       model_stubbing_users(:default).name.should == 'bob'
-      model_stubbing_users(:default).admin.should == false
+      model_stubbing_users(:default).forum_admin.should == false
       
-      model_stubbing_users(:admin).name.should == 'bob'
-      model_stubbing_users(:admin).admin.should == true
+      model_stubbing_users(:forum_admin).name.should == 'bob'
+      model_stubbing_users(:forum_admin).forum_admin.should == true
     end
     
     it "retrieves new records based on stubs" do
       record = new_model_stubbing_user(:default)
       record.name.should == 'bob'
-      record.admin.should == false
+      record.forum_admin.should == false
     end
     
     it "retrieves instantiated stubs" do
@@ -51,13 +51,13 @@ module ModelStubbing
   
     it "generates custom stubs" do
       default = model_stubbing_users(:default)
-      custom  = model_stubbing_users(:default, :admin => true)
+      custom  = model_stubbing_users(:default, :forum_admin => true)
       custom.id.should_not == default.id
-      custom.id.should == model_stubbing_users(:default, :admin => true).id
+      custom.id.should == model_stubbing_users(:default, :forum_admin => true).id
     end
     
     it "associates belongs_to stubs" do
-      model_stubbing_posts(:default).user.should == model_stubbing_users(:admin)
+      model_stubbing_posts(:default).user.should == model_stubbing_users(:forum_admin)
     end
     
     it "associates has_many stubs" do

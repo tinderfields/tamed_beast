@@ -90,7 +90,7 @@ describe Post, "#editable_by?" do
     @post.should be_editable_by(@user)
   end
   
-  it "allows admin" do
+  it "allows forum_admin" do
     @user.should_receive(:moderator_of?).and_return(true)
     @post.should be_editable_by(@user)
   end

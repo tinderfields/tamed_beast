@@ -8,16 +8,16 @@ module ModelStubbing
   
     def test_should_retrieve_stubs
       assert_equal 'bob', model_stubbing_users(:default).name
-      assert_equal false, model_stubbing_users(:default).admin
+      assert_equal false, model_stubbing_users(:default).forum_admin
     
-      assert_equal 'bob', model_stubbing_users(:admin).name
-      assert model_stubbing_users(:admin).admin
+      assert_equal 'bob', model_stubbing_users(:forum_admin).name
+      assert model_stubbing_users(:forum_admin).forum_admin
     end
   
     def test_should_retrieve_new_records_based_on_stubs
       record = new_model_stubbing_user(:default)
       assert_equal 'bob', record.name
-      assert_equal false, record.admin
+      assert_equal false, record.forum_admin
     end
   
     def test_should_retrieve_instantiated_stubs
@@ -51,13 +51,13 @@ module ModelStubbing
     end
   
     def test_should_generate_custom_stubs
-      custom = model_stubbing_users(:default, :admin => true)
+      custom = model_stubbing_users(:default, :forum_admin => true)
       assert_not_equal model_stubbing_users(:default).id, custom.id
-      assert_equal custom.id, model_stubbing_users(:default, :admin => true).id
+      assert_equal custom.id, model_stubbing_users(:default, :forum_admin => true).id
     end
   
     def test_should_associate_belongs_to_stubs
-      assert_equal model_stubbing_users(:admin), model_stubbing_posts(:default).user
+      assert_equal model_stubbing_users(:forum_admin), model_stubbing_posts(:default).user
     end
   
     def test_should_associate_has_many_stubs

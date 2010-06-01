@@ -126,7 +126,7 @@
     login: Einloggen
     logout: Ausloggen
 
-    user_is_administrator: Administrator
+    user_is_forum_administrator: forum_administrator
     user_is_moderator: Moderator
 
     user_since: Benutzer seit {{date}}
@@ -174,15 +174,15 @@
       beast_title: "Was ist Beast?"
       beast_desc: "Ein kleines, schlankes Forum mit einem furchterregenden Namen, basierend auf Ruby on Rails und dem Ziel, aus etwa 500 Zeilen Quelltext zu bestehen – wenn es mal fertig sein sollte. ;-)"
 
-    admin:
-      title: Administration
+    forum_admin:
+      title: forum_administration
       create_new_forum: Neues Forum anlegen
 
-      admin_and_moderation: Admin & Moderation
+      forum_admin_and_moderation: forum_admin & Moderation
       remove_moderated_forum: Der Benutzer kann folgende Foren moderieren. Anklicken um dessen Moderation zu löschen.
       remove_user_as_moderator: Benutzer als Moderator von &raquo;{{forum}}&laquo; entfernen?
       add_as_moderator: Als Moderator hinzufügen
-      user_is_an_administrator: User ist ein Administrator
+      user_is_an_forum_administrator: User ist ein forum_administrator
       suspend_user_account: Benutzer sperren
       user_account_is_suspended: Benutzer ist gesperrt
       unsuspend_user_account: Benutzer freischalten
@@ -247,7 +247,7 @@
       current_status_title: Status
       website_title: Webseite
       posts_title: Beiträge
-      admin_in_parens: "(Administrator)"
+      forum_admin_in_parens: "(forum_administrator)"
       search_title: suchen
 
       avatars_title: Avatar

@@ -92,11 +92,11 @@ describe User, "#post for moderators" do
   end
 end
 
-describe User, "#post for admins" do
+describe User, "#post for forum_admins" do
   include TopicCreatePostHelper
   
   before do
-    @user.admin = true
+    @user.forum_admin = true
   end
   
   it "sets sticky bit" do
@@ -166,11 +166,11 @@ describe User, "#revise(topic) for moderators" do
   end
 end
 
-describe User, "#revise(topic) for admins" do
+describe User, "#revise(topic) for forum_admins" do
   include TopicUpdatePostHelper
   
   before do
-    @user.admin = true
+    @user.forum_admin = true
   end
   
   it "sets sticky bit" do

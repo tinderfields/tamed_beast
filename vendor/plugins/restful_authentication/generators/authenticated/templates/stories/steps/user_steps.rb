@@ -82,7 +82,7 @@ end
 
 def named_<%= file_name %> login
   <%= file_name %>_params = {
-    'admin'   => {'id' => 1, 'login' => 'addie', 'password' => '1234addie', 'email' => 'admin@example.com',       },
+    'forum_admin'   => {'id' => 1, 'login' => 'addie', 'password' => '1234addie', 'email' => 'forum_admin@example.com',       },
     'oona'    => {          'login' => 'oona',   'password' => '1234oona',  'email' => 'unactivated@example.com'},
     'reggie'  => {          'login' => 'reggie', 'password' => 'monkey',    'email' => 'registered@example.com' },
     }
