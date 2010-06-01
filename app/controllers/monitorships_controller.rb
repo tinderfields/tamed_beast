@@ -1,4 +1,4 @@
-class MonitorshipsController < ApplicationController
+class MonitorshipsController < TamedBeastController
   before_filter :login_required
 
   def create

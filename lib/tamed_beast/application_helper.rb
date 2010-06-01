@@ -65,10 +65,6 @@ module TamedBeast
     def for_moderators_of(record, &block)
       moderator_of?(record) && concat(capture(&block))
     end
-    
-    def forum_admin?
-      current_user && current_user.forum_admin
-    end
 
   end   
 end

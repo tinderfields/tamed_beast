@@ -1,9 +1,9 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-class TamedBeastController < ActionController::Base
+class TamedBeastController < ApplicationController
   # include AuthenticatedSystem
   
-  layout 'application'
+  layout 'tamed_beast'
   
   helper :all
   helper_method :current_page, :forum_admin?

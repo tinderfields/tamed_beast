@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < TamedBeastController  
   before_filter :forum_admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :edit]
   before_filter :find_user, :only => [:update, :show, :edit, :suspend, :unsuspend, :destroy, :purge]
   before_filter :login_required, :only => [:settings, :update]

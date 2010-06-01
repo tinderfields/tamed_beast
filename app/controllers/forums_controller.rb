@@ -1,4 +1,4 @@
-class ForumsController < ApplicationController
+class ForumsController < TamedBeastController
   # before_filter :forum_admin_required, :except => [:index, :show]
 
   # GET /forums

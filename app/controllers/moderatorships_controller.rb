@@ -1,4 +1,4 @@
-class ModeratorshipsController < ApplicationController
+class ModeratorshipsController < TamedBeastController  
   def create
     @moderatorship = Moderatorship.new(params[:moderatorship])
 

@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class PostsController < TamedBeastController
   before_filter :find_parents
   before_filter :find_post, :only => [:edit, :update, :destroy]
 

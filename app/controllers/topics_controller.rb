@@ -1,4 +1,4 @@
-class TopicsController < ApplicationController
+class TopicsController < TamedBeastController  
   before_filter :find_forum
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
 
