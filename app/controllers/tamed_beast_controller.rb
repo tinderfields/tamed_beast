@@ -1,12 +1,11 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class TamedBeastController < ApplicationController
-  # include AuthenticatedSystem
   
   layout 'tamed_beast'
   
   helper :all
-  helper_method :current_page, :forum_admin?
+  helper_method :current_page, :forum_admin?, :logged_in?
   before_filter :set_language
   # before_filter :login_required, :only => [:new, :edit, :create, :update, :destroy]
   # 
@@ -36,6 +35,10 @@ class TamedBeastController < ApplicationController
   
   def forum_admin?
     current_user && current_user.forum_admin
+  end
+  
+  def logged_in?
+     !!current_user
   end
 
 end

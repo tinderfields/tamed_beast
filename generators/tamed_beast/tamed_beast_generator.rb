@@ -9,6 +9,8 @@ class TamedBeastGenerator < Rails::Generator::Base
       m.template  "views/layouts/_tb_head.html.erb", "app/views/layouts/_tb_head.html.erb"
       m.template  "tamed_beast.css", "public/stylesheets/tamed_beast.css"
       `cp -rf vendor/plugins/tamed_beast/vendor/plugins/* vendor/plugins/`
+      m.directory "public/images"
+      `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`
     end
   end
 end
