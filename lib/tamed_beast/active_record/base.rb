@@ -6,8 +6,8 @@ module TamedBeast
         base.send(:include, InstanceMethods)
       
         class << base
-          @@white_list_sanitizer = HTML::WhiteListSanitizer.new
-          cattr_reader :white_list_sanitizer
+          cattr_accessor :white_list_sanitizer     
+          self.white_list_sanitizer = HTML::WhiteListSanitizer.new
           attr_accessor :formatted_attributes
         end  
       end
