@@ -3,8 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title><%=h "Forum title" || I18n.t('txt.beast_title', :default => 'Altered Beast') %><%= " - #{h @page_title}" if @page_title %></title>
-  <%= stylesheet_link_tag 'display' %>
-  <%= stylesheet_link_tag 'captcha' %>
+  <%= stylesheet_link_tag 'tamed_beast' %>
   <%= javascript_include_tag "prototype", "effects", "lowpro", "time", "application", :cache => "beast" %>
 <% unless @feed_icons.blank? -%>
   <% @feed_icons.each do |feed| -%>
