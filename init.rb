@@ -1,6 +1,7 @@
 # Include hook code here
 ActiveRecord::Base.send :include, TamedBeast::ActiveRecord::Base   
-ActionController::Base.helper(TamedBeast::ApplicationHelper)       
+ActionController::Base.helper(TamedBeast::Helpers::ApplicationHelper) 
+ActionController::Base.helper(TamedBeast::Helpers::ForumUsersHelper)       
 
 # FIX for engines model reloading issue in development mode
 if ENV['RAILS_ENV'] != 'production'
