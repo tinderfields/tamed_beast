@@ -13,12 +13,12 @@ class TamedBeastGenerator < Rails::Generator::Base
       `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`
       m.template  "forum_user.rb", "app/models/forum_user.rb"
       m.directory "public/javascripts"
-      m.template  "javascripts/tamed_beast.js", "public/javascript/tamed_beast.js"
-      m.template  "javascripts/controls.js", "public/javascript/controls.js"
-      m.template  "javascripts/dragdrop.js", "public/javascript/dragdrop.js"
-      m.template  "javascripts/efects.js", "public/javascript/effects.js"
-      m.template  "javascripts/lowpro.js", "public/javascript/lowpro.js"
-      m.template  "javascripts/prototype.js", "public/javascript/prototype.js"
+      m.template  "javascripts/tamed_beast.js", "public/javascripts/tamed_beast.js"
+      m.template  "javascripts/controls.js", "public/javascripts/controls.js"
+      m.template  "javascripts/dragdrop.js", "public/javascripts/dragdrop.js"
+      m.template  "javascripts/efects.js", "public/javascripts/effects.js"
+      m.template  "javascripts/lowpro.js", "public/javascripts/lowpro.js"
+      m.template  "javascripts/prototype.js", "public/javascripts/prototype.js"
     end
   end
 end
