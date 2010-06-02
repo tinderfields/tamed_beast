@@ -61,8 +61,12 @@ module ApplicationHelper
     atom ? send("#{prefix}_posts_path", options.update(:format => :atom)) : send("#{prefix}_posts_path", options)
   end
 
-  def for_moderators_of(record, &block)
-    moderator_of?(record) && concat(capture(&block))
-  end
+  # def for_moderators_of(record, &block)
+  #   moderator_of?(record) && concat(capture(&block))
+  # end  
 
+  def for_moderators_of(forum, &block)
+    forum.moderated_by?(@current_user) && concat(capture(&block))
+  end
+  
 end

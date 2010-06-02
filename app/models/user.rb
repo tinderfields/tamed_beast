@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
     @available_forums ||= Forum.ordered - forums
   end
 
-  def moderator_of?(forum)
-    !!(forum_admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
-  end
+  # def moderator_of?(forum)
+  #   !!(forum_admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
+  # end
 
   def display_name
     n = read_attribute(:display_name)
