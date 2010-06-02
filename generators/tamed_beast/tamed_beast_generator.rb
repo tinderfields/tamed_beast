@@ -35,7 +35,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`
       
       # Gem dependencies
-      m.gem_dependency "#{test}"
+      m.gem_dependency "gem", "#test"
       
     end
   end
