@@ -15,12 +15,12 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resources :posts, :collection => {:search => :get}
-  # map.resources :users, :member => { :suspend   => :put,
-  #                                    :settings  => :get,
-  #                                    :make_forum_admin => :put,
-  #                                    :unsuspend => :put,
-  #                                    :purge     => :delete },
-  #                       :has_many => [:posts]
+  map.resources :forum_users, :member => { :suspend   => :put,
+                                     :settings  => :get,
+                                     :make_forum_admin => :put,
+                                     :unsuspend => :put,
+                                     :purge     => :delete },
+                        :has_many => [:posts]  
   # 
   # map.activate '/activate/:activation_code', :controller => 'users',    :action => 'activate', :activation_code => nil
   # map.signup   '/signup',                    :controller => 'users',    :action => 'new'
