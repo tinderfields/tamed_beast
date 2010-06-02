@@ -3,7 +3,7 @@ Rails::Generator::Commands::Create.class_eval do
     logger.insert "Gem dependency: #{gem_name}"
     file = "config/environment.rb"
     
-    gsub_file file, /^Rails::Initializer.run do |config|$/ do |match|
+    gsub_file file, "Rails::Initializer.run do |config|" do |match|
       "#{match}\n  #{command}"
     end
   end 
