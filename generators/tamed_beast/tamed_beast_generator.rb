@@ -35,7 +35,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`
       
       # Gem dependencies
-      m.gem_dependency "RedCloth", "config.gem 'RedCloth', :lib => 'redcloth', :source => 'http://code.whytheluckystiff.net'"
+      m.gem_dependency "RedCloth", "config.gem 'RedCloth', :lib => 'redcloth'"
       m.gem_dependency "bluecloth", "config.gem 'bluecloth'"
       m.gem_dependency "mislav-will_paginate", "config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'"
 
