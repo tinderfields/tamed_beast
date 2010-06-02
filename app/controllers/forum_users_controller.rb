@@ -48,7 +48,7 @@ class ForumUsersController < TamedBeastController
   def update
     @user = forum_admin? ? find_user : current_user
     respond_to do |format|
-      if @user.update_attributes(params[:forum_user])
+      if @user.update_attributes(params[:user])
         flash[:notice] = 'User account was successfully updated.'
         format.html { redirect_to(settings_path) }
         format.xml  { head :ok }
@@ -94,7 +94,7 @@ class ForumUsersController < TamedBeastController
   def make_forum_admin
     redirect_back_or_default('/') and return unless forum_admin?
     @user = find_user
-    @user.forum_admin = (params[:forum_user][:forum_admin] == "1")
+    @user.forum_admin = (params[:user][:forum_admin] == "1")
     @user.save
     redirect_to @user
   end
