@@ -12,6 +12,10 @@ module ForumUser
    end  
     
     module ClassMethods
+      # def active
+      #    find_all_by_state('active')
+      #    User.all
+      # end   
     end
     
     module InstanceMethods  
@@ -20,6 +24,14 @@ module ForumUser
         self.class.update_all ['last_seen_at = ?', now], ['id = ?', id]
         write_attribute :last_seen_at, now
       end
-    end                                                           
+      
+      def active?
+        true
+      end
+      
+      def display_name
+         login
+      end
+    end                                                          
    
 end
