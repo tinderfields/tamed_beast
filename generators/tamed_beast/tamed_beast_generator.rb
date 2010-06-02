@@ -1,3 +1,5 @@
+require File.expand_path(File.dirname(__FILE__) + "/insert_commands.rb")
+
 class TamedBeastGenerator < Rails::Generator::Base
   def manifest
     record do |m|
@@ -31,7 +33,10 @@ class TamedBeastGenerator < Rails::Generator::Base
       # Images
       m.directory "public/images"
       `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`
-
+      
+      # Gem dependencies
+      m.gem_dependency "#{test}"
+      
     end
   end
 end

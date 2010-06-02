@@ -4,7 +4,7 @@
   <p><%= I18n.t 'txt.views_users.gravatar_notice', :default => 'To have your very own avatar displayed on this forum visit {{gravatar}} and sign up for a free gravatar.', :gravatar => '<a href="http://www.gravatar.com/" title="Gravatar - Globally Recognized Avatars">Gravatar</a>' %></p>
 
   <% if current_user.forum_admin? %>
-    <% form_for @user, :url => make_forum_admin_user_path(@user) do |f| %>
+    <% form_for @user, :url => make_admin_forum_user_path(@user) do |f| %>
       <h5>forum_admin</h5>
       <p>
         <%= f.check_box :forum_admin %>

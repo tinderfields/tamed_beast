@@ -30,7 +30,7 @@
     </div>
 
     <%= avatar_for @users[post.user_id] %>
-    <span class="fn"><%= link_to truncate(h(@users[post.user_id].display_name), :length => 15), user_path(post.user) %></span>
+    <span class="fn"><%= link_to truncate(h(@users[post.user_id].display_name), :length => 15), forum_user_path(post.user) %></span>
     <span class="posts"><%= I18n.t 'txt.count_posts', :count => @users[post.user_id].posts.size, :num => number_with_delimiter(@users[post.user_id].posts.size) %></span>
   </td>
   <td class="body entry-content">

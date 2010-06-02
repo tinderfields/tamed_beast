@@ -1,6 +1,6 @@
 <h5><%= I18n.t 'txt.views_users.find_a_user', :default => 'Find a User' %></h5>
 
-<% form_tag users_path, :method => 'get' do -%>
+<% form_tag forum_users_path, :method => 'get' do -%>
 <p>
 <label><%= I18n.t 'txt.views_users.display_name_or_login', :default => 'Display name or login' %></label>
 <%= text_field_tag :q, params[:q] %> 
@@ -25,7 +25,7 @@
   </tr>
 <% @users.each do |user|-%>  
   <tr>
-    <td><%= link_to h(user.display_name || user.login), user, :class => (user.forum_admin? ? "forum_admin" : nil) %>
+    <td><%= link_to h(user.display_name || user.login), forum_user_path(user), :class => (user.forum_admin? ? "forum_admin" : nil) %>
       <span style="color:#666">
       <%= I18n.t('txt.views_users.forum_admin_in_parens', :default => "(forum_admin)") if user.forum_admin? %>
       </span>

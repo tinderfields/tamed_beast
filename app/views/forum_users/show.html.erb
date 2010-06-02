@@ -31,10 +31,10 @@
   	<% end -%>
   <% end -%>
 
-  <p><%= link_to I18n.t('txt.forum_admin.suspend_user_account', :default => "Suspend user account"), suspend_user_path(@user), :method => :put %></p>
+  <p><%= link_to I18n.t('txt.forum_admin.suspend_user_account', :default => "Suspend user account"), suspend_forum_user_path(@user), :method => :put %></p>
 
 <% else %>
-  <p><%= I18n.t 'txt.forum_admin.user_account_is_suspended', :default => "User account is suspended" %>. <%= link_to I18n.t('txt.forum_admin.unsuspend_user_account', :default => "Unsuspend user account"), unsuspend_user_path(@user), :method => :put %></p>
+  <p><%= I18n.t 'txt.forum_admin.user_account_is_suspended', :default => "User account is suspended" %>. <%= link_to I18n.t('txt.forum_admin.unsuspend_user_account', :default => "Unsuspend user account"), unsuspend_forum_user_path(@user), :method => :put %></p>
   
 <% end %>
 <p><%= link_to I18n.t('txt.forum_admin.edit_user_account', :default => "Edit user account"), edit_user_path(@user) %></p>
@@ -46,11 +46,11 @@
 <h1><%=h @user.display_name %> </h1>
 
 <p class="subtitle">
-  <%= feed_icon_tag @user.display_name, user_posts_path(:user_id => @user, :format => :rss) %>
+  <%= feed_icon_tag @user.display_name, forum_user_posts_path(:forum_user_id => @user.id, :format => :rss) %>
   <span>
     <%= I18n.t 'txt.count_topics', :count => @user.topics.size, :num => number_with_delimiter(@user.topics.size) %>,
     <%= I18n.t 'txt.count_posts', :count => @user.posts.size, :num => number_with_delimiter(@user.posts.size) %>
-    (<%= I18n.t 'txt.view', :default => 'view' %> <%= link_to I18n.t('txt.all', :default => 'all'), user_posts_path(@user) %> | <%= link_to I18n.t('txt.monitored', :default => 'monitored'), "#" %> <%= I18n.t 'txt.posts', :default => 'posts' %>)<br />
+    (<%= I18n.t 'txt.view', :default => 'view' %> <%= link_to I18n.t('txt.all', :default => 'all'), forum_user_posts_path(@user) %> | <%= link_to I18n.t('txt.monitored', :default => 'monitored'), "#" %> <%= I18n.t 'txt.posts', :default => 'posts' %>)<br />
   </span>
 </p>
 

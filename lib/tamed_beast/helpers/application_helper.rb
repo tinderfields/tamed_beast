@@ -55,8 +55,8 @@ module TamedBeast
             options.update :forum_id => @forum
             :forum
           elsif @user
-            options.update :user_id => @user
-            :user
+            options.update :forum_user_id => @user
+            :forum_user
           else
             :search
           end

@@ -5,17 +5,31 @@ module ForumUser
      base.send(:include, InstanceMethods)
                          
      base.class_eval{
-       has_many :posts
-       has_many :topics  
+       has_many :posts, :order => "#{Post.table_name}.created_at desc"
+       has_many :topics, :order => "#{Topic.table_name}.created_at desc"
+
+       has_many :moderatorships, :dependent => :delete_all
+       has_many :forums, :through => :moderatorships, :source => :forum do
+         def moderatable
+           find :all, :select => "#{Forum.table_name}.*, #{Moderatorship.table_name}.id as moderatorship_id"
+         end
+       end
+
+       has_many :monitorships, :dependent => :delete_all
+       has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
+
+       has_permalink :login
+
+       attr_readonly :posts_count, :last_seen_at  
      }     
      
    end  
     
     module ClassMethods
-      # def active
-      #    find_all_by_state('active')
-      #    User.all
-      # end   
+      def active
+         find_all_by_state('active')
+         User.all
+      end   
     end
     
     module InstanceMethods  

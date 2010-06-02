@@ -88,8 +88,8 @@ class PostsController < TamedBeastController
 
 protected
   def find_parents
-    if params[:user_id]
-      @parent = @user = User.find(params[:user_id])
+    if params[:forum_user_id]
+      @parent = @user = User.find(params[:forum_user_id])
     elsif params[:forum_id]
       @parent = @forum = Forum.find_by_permalink(params[:forum_id])
       @parent = @topic = @forum.topics.find_by_permalink(params[:topic_id]) if params[:topic_id]

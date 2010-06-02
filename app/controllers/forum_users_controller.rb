@@ -1,7 +1,8 @@
-class ForumUsersController < TamedBeastController  
+class ForumUsersController < TamedBeastController
+    
   before_filter :forum_admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :edit]
   before_filter :find_user, :only => [:update, :show, :edit, :suspend, :unsuspend, :destroy, :purge]
-  before_filter :login_required, :only => [:settings, :update]
+  before_filter :require_user, :only => [:settings, :update]
 
   # Brainbuster Captcha
   # before_filter :create_brain_buster, :only => [:new]
@@ -17,23 +18,23 @@ class ForumUsersController < TamedBeastController
     end
   end
 
-  # render new.rhtml
-  def new
-  end
-
-  def create
-    cookies.delete :auth_token
-    @user = User.new(params[:user])    
-    @user.save if @user.valid?
-    @user.register! if @user.valid?
-    unless @user.new_record?
-      redirect_back_or_default('/login')
-      flash[:notice] = I18n.t 'txt.activation_required', 
-        :default => "Thanks for signing up! Please click the link in your email to activate your account"
-    else
-      render :action => 'new'
-    end
-  end
+  # # render new.rhtml
+  # def new
+  # end
+  # 
+  # def create
+  #   cookies.delete :auth_token
+  #   @user = User.new(params[:user])    
+  #   @user.save if @user.valid?
+  #   @user.register! if @user.valid?
+  #   unless @user.new_record?
+  #     redirect_back_or_default('/login')
+  #     flash[:notice] = I18n.t 'txt.activation_required', 
+  #       :default => "Thanks for signing up! Please click the link in your email to activate your account"
+  #   else
+  #     render :action => 'new'
+  #   end
+  # end                                          
 
   def settings
     @user = current_user
@@ -47,7 +48,7 @@ class ForumUsersController < TamedBeastController
   def update
     @user = forum_admin? ? find_user : current_user
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:forum_user])
         flash[:notice] = 'User account was successfully updated.'
         format.html { redirect_to(settings_path) }
         format.xml  { head :ok }
@@ -93,7 +94,7 @@ class ForumUsersController < TamedBeastController
   def make_forum_admin
     redirect_back_or_default('/') and return unless forum_admin?
     @user = find_user
-    @user.forum_admin = (params[:user][:forum_admin] == "1")
+    @user.forum_admin = (params[:forum_user][:forum_admin] == "1")
     @user.save
     redirect_to @user
   end

@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :collection => {:search => :get}
   map.resources :forum_users, :member => { :suspend   => :put,
                                      :settings  => :get,
-                                     :make_forum_admin => :put,
+                                     :make_admin => :put,
                                      :unsuspend => :put,
                                      :purge     => :delete },
                         :has_many => [:posts]  
@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.signup   '/signup',                    :controller => 'users',    :action => 'new'
   # map.login    '/login',                     :controller => 'sessions', :action => 'new'
   # map.logout   '/logout',                    :controller => 'sessions', :action => 'destroy'
-  map.settings '/settings',                  :controller => 'users',    :action => 'settings'
+  map.settings '/settings',                  :controller => 'forum_users',    :action => 'settings'
   # map.resource  :session                                                                  
   
   map.with_options :controller => 'posts', :action => 'monitored' do |map|
