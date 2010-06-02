@@ -45,7 +45,7 @@ class TopicsController < TamedBeastController
     @topic.forum = @forum
     
     respond_to do |format|
-      if @topic.save
+      if @topic.save!
         flash[:notice] = 'Topic was successfully created.'
         format.html { redirect_to(forum_topic_path(@forum, @topic)) }
         format.xml  { render :xml  => @topic, :status => :created, :location => forum_topic_url(@forum, @topic) }

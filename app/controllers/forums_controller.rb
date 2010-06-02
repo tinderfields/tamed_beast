@@ -25,6 +25,10 @@ class ForumsController < TamedBeastController
     respond_to do |format|
       format.html do # show.html.erb
         @topics = @forum.topics.paginate :page => current_page
+        p "topic: #{@topics.inspect}"
+        p "forum: #{@forum.inspect}"
+        p "last_page: #{@topics.first.last_page}"
+        p "recent_post: #{@topics.first.recent_post}"
       end
       format.xml  { render :xml => @forum }
     end
