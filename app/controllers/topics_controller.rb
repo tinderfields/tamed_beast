@@ -40,18 +40,31 @@ class TopicsController < TamedBeastController
   end
 
   def create
-    @topic = current_user.post @forum, params[:topic]
-
+    # @topic = current_user.post @forum, params[:topic]    
+    @topic = current_user.topics.build params[:topic]
+    @topic.forum = @forum
+    
     respond_to do |format|
-      if @topic.new_record?
-        format.html { render :action => "new" }
-        format.xml  { render :xml  => @topic.errors, :status => :unprocessable_entity }
-      else
+      if @topic.save
         flash[:notice] = 'Topic was successfully created.'
         format.html { redirect_to(forum_topic_path(@forum, @topic)) }
         format.xml  { render :xml  => @topic, :status => :created, :location => forum_topic_url(@forum, @topic) }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml  => @topic.errors, :status => :unprocessable_entity }
       end
     end
+
+    # respond_to do |format|
+    #   if @topic.new_record?
+    #     format.html { render :action => "new" }
+    #     format.xml  { render :xml  => @topic.errors, :status => :unprocessable_entity }
+    #   else
+    #     flash[:notice] = 'Topic was successfully created.'
+    #     format.html { redirect_to(forum_topic_path(@forum, @topic)) }
+    #     format.xml  { render :xml  => @topic, :status => :created, :location => forum_topic_url(@forum, @topic) }
+    #   end
+    # end 
   end
 
   def update

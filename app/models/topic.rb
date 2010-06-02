@@ -4,6 +4,7 @@ class Topic < ActiveRecord::Base
   before_validation_on_create :set_default_attributes
   validates_presence_of :title
 
+  before_create  :set_topic_type
   after_create   :create_initial_post
   before_update  :check_for_moved_forum
   after_update   :set_post_forum_id
@@ -72,7 +73,8 @@ class Topic < ActiveRecord::Base
 
 protected
   def create_initial_post
-    user.reply self, @body #unless locked?
+    # user.reply self, @body #unless locked?
+    posts.create(:body => body, :user_id => user_id)
     @body = nil
   end
   
@@ -103,5 +105,9 @@ protected
     @user_posts.each do |user_id, posts|
       User.update_all "posts_count = posts_count - #{posts.size}", ['id = ?', user_id]
     end
+  end
+  
+  def set_topic_type                                            
+    # topic.sticky, topic.locked = attributes[:sticky], attributes[:locked] if is_moderator
   end
 end

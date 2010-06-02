@@ -11,6 +11,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       `cp -rf vendor/plugins/tamed_beast/vendor/plugins/* vendor/plugins/`
       m.directory "public/images"
       `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`
+      m.template "forum_user.rb" "app/models/forum_user.rb"
     end
   end
 end
