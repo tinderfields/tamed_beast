@@ -60,11 +60,11 @@ class User < ActiveRecord::Base
   #
   # This is now also used to show which users are online... not at accurate as the
   # session based approach, but less code and less overhead.
-  def seen!
-    now = Time.now.utc
-    self.class.update_all ['last_seen_at = ?', now], ['id = ?', id]
-    write_attribute :last_seen_at, now
-  end
+  # def seen!
+  #   now = Time.now.utc
+  #   self.class.update_all ['last_seen_at = ?', now], ['id = ?', id]
+  #   write_attribute :last_seen_at, now
+  # end  
   
   def to_param
     id.to_s # permalink || login

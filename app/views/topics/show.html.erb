@@ -92,7 +92,7 @@
     <% if post.user.forum_admin? || post.forum.moderators.include?(post.user) || !post.user.active? %>
     <span class="forum_admin">
       <% if post.user.forum_admin? %>
-        <%= I18n.t 'txt.user_is_forum_administrator', :default => 'forum_administator' %>
+        <%= I18n.t 'txt.user_is_forum_administrator', :default => 'administator' %>
       <% elsif post.forum.moderators.include?(post.user) %>
         <%= I18n.t 'txt.user_is_moderator', :default => 'Moderator' %>
       <% elsif post.user.suspended? %>

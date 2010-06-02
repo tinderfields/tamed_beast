@@ -33,19 +33,35 @@ class PostsController < TamedBeastController
     end
   end
 
+
   def create
-    @post = current_user.reply @topic, params[:post][:body]
+    # @post = current_user.reply @topic, params[:post][:body]
+    @post = @current_user.posts.build(:body => params[:post][:body])
+    @post.topic = @topic
+    @post.forum = @topic.forum
 
     respond_to do |format|
-      if @post.new_record?
-        format.html { redirect_to forum_topic_path(@forum, @topic) }
-        format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
-      else
+      if @post.save
         flash[:notice] = 'Post was successfully created.'
         format.html { redirect_to(forum_topic_post_path(@forum, @topic, @post, :anchor => dom_id(@post))) }
-        format.xml  { render :xml  => @post, :status => :created, :location => forum_topic_post_url(@forum, @topic, @post) }
+        format.xml  { render :xml  => @post, :status => :created, :location => forum_topic_post_url(@forum, @topic, @post) }        
+      else
+        format.html { redirect_to forum_topic_path(@forum, @topic) }
+        format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
       end
     end
+    # respond_to do |format|
+    #   if @post.new_record?
+    #     format.html { redirect_to forum_topic_path(@forum, @topic) }
+    #     format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
+    #   else
+    #     flash[:notice] = 'Post was successfully created.'
+    #     format.html { redirect_to(forum_topic_post_path(@forum, @topic, @post, :anchor => dom_id(@post))) }
+    #     format.xml  { render :xml  => @post, :status => :created, :location => forum_topic_post_url(@forum, @topic, @post) }
+    #   end
+    # end  
+
+
   end
 
   def update

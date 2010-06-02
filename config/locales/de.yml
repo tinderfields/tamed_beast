@@ -126,7 +126,7 @@
     login: Einloggen
     logout: Ausloggen
 
-    user_is_forum_administrator: forum_administrator
+    user_is_forum_administrator: administrator
     user_is_moderator: Moderator
 
     user_since: Benutzer seit {{date}}
@@ -182,7 +182,7 @@
       remove_moderated_forum: Der Benutzer kann folgende Foren moderieren. Anklicken um dessen Moderation zu löschen.
       remove_user_as_moderator: Benutzer als Moderator von &raquo;{{forum}}&laquo; entfernen?
       add_as_moderator: Als Moderator hinzufügen
-      user_is_an_forum_administrator: User ist ein forum_administrator
+      user_is_an_forum_administrator: User ist ein administrator
       suspend_user_account: Benutzer sperren
       user_account_is_suspended: Benutzer ist gesperrt
       unsuspend_user_account: Benutzer freischalten
@@ -247,7 +247,7 @@
       current_status_title: Status
       website_title: Webseite
       posts_title: Beiträge
-      forum_admin_in_parens: "(forum_administrator)"
+      forum_admin_in_parens: "(administrator)"
       search_title: suchen
 
       avatars_title: Avatar

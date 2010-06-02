@@ -8,7 +8,7 @@ namespace :app do
     say "If you are a developer, and you set the host to anything other than 'localhost', please make sure to add an entry to your /etc/hosts file, f.e.: '127.0.0.1 test.local'"
     
     options = OpenStruct.new :login => 'forum_admin', :password => nil, :email => 'forum_admin@example.com'
-    say "Time to create your forum_administrator account."
+    say "Time to create your administrator account."
     options.login = ask('Login:') {|q| q.default = options.login }
     options.password = ask('Password:') {|q| q.echo = '*' }
     options.email = ask('Email:') {|q| q.default = options.email }

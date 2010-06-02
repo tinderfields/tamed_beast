@@ -1,5 +1,5 @@
 class Topic < ActiveRecord::Base
-  # include User::Editable
+  include User::Editable
 
   before_validation_on_create :set_default_attributes
   validates_presence_of :title
@@ -70,16 +70,16 @@ class Topic < ActiveRecord::Base
   def to_param
     permalink
   end
-  
-  def editable_by?(user, is_moderator = nil)
-    is_moderator = forum.moderated_by?(user) if is_moderator.nil?
-    user && (user.id == user_id || is_moderator)
-  end
 
 protected
   def create_initial_post
     # user.reply self, @body #unless locked?
-    self.posts.create!(:body => body, :user_id => user_id)
+    self.posts.create!(:body => body) do |post|
+      post.user = user
+      post.forum = forum
+    end
+    # post.forum = forum
+    # post.save!  
     @body = nil
   end
   
