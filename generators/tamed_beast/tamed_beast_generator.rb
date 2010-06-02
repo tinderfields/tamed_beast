@@ -16,7 +16,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       m.template  "javascripts/tamed_beast.js", "public/javascripts/tamed_beast.js"
       m.template  "javascripts/controls.js", "public/javascripts/controls.js"
       m.template  "javascripts/dragdrop.js", "public/javascripts/dragdrop.js"
-      m.template  "javascripts/efects.js", "public/javascripts/effects.js"
+      m.template  "javascripts/effects.js", "public/javascripts/effects.js"
       m.template  "javascripts/lowpro.js", "public/javascripts/lowpro.js"
       m.template  "javascripts/prototype.js", "public/javascripts/prototype.js"
     end
