@@ -9,7 +9,7 @@ Rails::Generator::Commands::Create.class_eval do
   end
   
   def model_include(model_name, include_name)
-    insert_into("app/models/#{model_name}", "Include #{include_name}")
+    insert_into("app/models/#{model_name}", "include #{include_name}")
   end
   
   def insert_into(file, line)

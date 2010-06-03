@@ -6,37 +6,36 @@ class TamedBeastGenerator < Rails::Generator::Base
     record do |m|
       
       # Controllers
-      m.templates_from_dir "controllers", "app/controllers/tamed_beast"
+      m.files_from_dir "controllers", "app/controllers/tamed_beast"
       
       # Models
       m.file  "models/forum_user.rb", "app/models/forum_user.rb"
-
+      
       # Views
       m.files_from_dir "views", "app/views"
       
       # Migrations
       m.migration_template "migrations/migration.rb", "db/migrate", :migration_file_name => "tamed_beast_tables"
       
-      # Views
-      m.files_from_dir "app", "views"
-      
       # Javascripts
       m.files_from_dir "javascripts", "public/javascripts"
       
       # Plugins
-      `cp -rf vendor/plugins/tamed_beast/vendor/plugins/* vendor/plugins/`      
+      m.files_from_dir "vendor/plugins", "vendor/plugins" 
       
       # Stylesheets
       m.file  "stylesheets/tamed_beast.css", "public/stylesheets/tamed_beast.css"
       
       # Images
-      m.directory "public/images"
-      `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`      
+      m.files_from_dir "images", "public/images"
       
       # Gem dependencies
       m.gem_dependency "RedCloth", "config.gem 'RedCloth', :lib => 'redcloth'"
       m.gem_dependency "bluecloth", "config.gem 'bluecloth'"
-      m.gem_dependency "mislav-will_paginate", "config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'"                               
+      m.gem_dependency "mislav-will_paginate", "config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'"
+      
+      # Include in User model
+      m.model_include "user.rb", "ForumUser"                               
 
     end
   end
