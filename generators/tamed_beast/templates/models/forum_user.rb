@@ -5,6 +5,9 @@ module ForumUser
      base.send(:include, InstanceMethods)
                          
      base.class_eval{
+       
+       formats_attributes :bio
+       
        has_many :posts, :order => "#{Post.table_name}.created_at desc"
        has_many :topics, :order => "#{Topic.table_name}.created_at desc"
 
@@ -22,16 +25,13 @@ module ForumUser
 
        attr_readonly :posts_count, :last_seen_at
        
-       named_scope :active, :conditions => { :state => "active" }
+       named_scope :active, :conditions => { :state => "active" }   
        
      }
      
    end  
     
     module ClassMethods
-      # def active
-      #    find_all_by_state('active')
-      # end   
     end
     
     module InstanceMethods  
@@ -47,6 +47,12 @@ module ForumUser
       
       def display_name
          login
+      end
+      
+      alias_method :to_s, :display_name
+      
+      def to_param
+        id.to_s # permalink || login
       end
     end                                                          
    

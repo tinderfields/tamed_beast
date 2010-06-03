@@ -1,24 +1,24 @@
 class User < ActiveRecord::Base
   concerned_with :states, :activation, :posting, :validation
-  formats_attributes :bio
+  # formats_attributes :bio
 
   
-  has_many :posts, :order => "#{Post.table_name}.created_at desc"
-  has_many :topics, :order => "#{Topic.table_name}.created_at desc"
+  # has_many :posts, :order => "#{Post.table_name}.created_at desc"
+  #  has_many :topics, :order => "#{Topic.table_name}.created_at desc"
+  #  
+  #  has_many :moderatorships, :dependent => :delete_all
+  #  has_many :forums, :through => :moderatorships, :source => :forum do
+  #    def moderatable
+  #      find :all, :select => "#{Forum.table_name}.*, #{Moderatorship.table_name}.id as moderatorship_id"
+  #    end
+  #  end
+  #  
+  #  has_many :monitorships, :dependent => :delete_all
+  #  has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}             
   
-  has_many :moderatorships, :dependent => :delete_all
-  has_many :forums, :through => :moderatorships, :source => :forum do
-    def moderatable
-      find :all, :select => "#{Forum.table_name}.*, #{Moderatorship.table_name}.id as moderatorship_id"
-    end
-  end
-  
-  has_many :monitorships, :dependent => :delete_all
-  has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
-  
-  has_permalink :login
-  
-  attr_readonly :posts_count, :last_seen_at
+  # has_permalink :login
+  # 
+  # attr_readonly :posts_count, :last_seen_at     
 
   named_scope :named_like, lambda {|name|
     { :conditions => ["users.display_name like ? or users.login like ?", 
@@ -44,12 +44,12 @@ class User < ActiveRecord::Base
   #   !!(forum_admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
   # end
 
-  def display_name
-    n = read_attribute(:display_name)
-    n.blank? ? login : n
-  end
+  # def display_name
+  #   n = read_attribute(:display_name)
+  #   n.blank? ? login : n
+  # end  
 
-  alias_method :to_s, :display_name
+  # alias_method :to_s, :display_name   
   
   # this is used to keep track of the last time a user has been seen (reading a topic)
   # it is used to know when topics are new or old and which should have the green
@@ -66,9 +66,9 @@ class User < ActiveRecord::Base
   #   write_attribute :last_seen_at, now
   # end  
   
-  def to_param
-    id.to_s # permalink || login
-  end
+  # def to_param
+  #   id.to_s # permalink || login
+  # end  
 
   def openid_url=(value)
     write_attribute :openid_url, value.blank? ? nil : OpenIdAuthentication.normalize_identifier(value)
