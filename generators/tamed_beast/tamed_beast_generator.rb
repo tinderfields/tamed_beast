@@ -21,7 +21,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       m.files_from_dir "javascripts", "public/javascripts"
       
       # Plugins
-      m.files_from_dir "vendor/plugins", "vendor/plugins" 
+      m.files_from_dir "plugins", "vendor/plugins" 
       
       # Stylesheets
       m.file  "stylesheets/tamed_beast.css", "public/stylesheets/tamed_beast.css"
