@@ -6,7 +6,7 @@
 <h5><%= I18n.t 'txt.voices', :default => 'Voices' %></h5>
 <ul class="flat talking">
 <% @topic.voices.each do | user | %>
-  <li><%= link_to h(user.display_name), user_path(user) %></li>
+  <li><%= link_to h(user.display_name), forum_user_path(user) %></li>
 <% end %>
 </ul>
 
@@ -88,7 +88,7 @@
     </div>
 
     <%= avatar_for post.user %>
-    <span class="fn"><%= link_to truncate(h(post.user.display_name), :length => 15), user_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
+    <span class="fn"><%= link_to truncate(h(post.user.display_name), :length => 15), forum_user_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
     <% if post.user.forum_admin? || post.forum.moderators.include?(post.user) || !post.user.active? %>
     <span class="forum_admin">
       <% if post.user.forum_admin? %>

@@ -37,7 +37,7 @@
   <p><%= I18n.t 'txt.forum_admin.user_account_is_suspended', :default => "User account is suspended" %>. <%= link_to I18n.t('txt.forum_admin.unsuspend_user_account', :default => "Unsuspend user account"), unsuspend_forum_user_path(@user), :method => :put %></p>
   
 <% end %>
-<p><%= link_to I18n.t('txt.forum_admin.edit_user_account', :default => "Edit user account"), edit_user_path(@user) %></p>
+<p><%= link_to I18n.t('txt.forum_admin.edit_user_account', :default => "Edit user account"), edit_forum_user_path(@user) %></p>
 <% end -%>
 <% end -%>
 

@@ -68,7 +68,7 @@ module TamedBeast
         content_text      = options.delete(:content_text)
         content_text    ||= user.send(options.delete(:content_method))
         options[:title] ||= user.send(options.delete(:title_method))
-        link_to h(content_text), user_path(user), options
+        link_to h(content_text), forum_user_path(user), options
       end
 
       #

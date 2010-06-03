@@ -11,7 +11,7 @@ describe ModeratorshipsController, "POST #create" do
     act! { post :create, :moderatorship => @attributes }
     
     it_assigns :moderatorship, :flash => { :notice => :not_nil }
-    it_redirects_to { user_path(users(:default)) }
+    it_redirects_to { forum_user_path(users(:default)) }
   end
 
   describe ModeratorshipsController, "(unsuccessful creation)" do
@@ -19,7 +19,7 @@ describe ModeratorshipsController, "POST #create" do
     act! { post :create, :moderatorship => @attributes.merge('forum_id' => '') }
     
     it_assigns :moderatorship, :flash => {:notice => nil, :error => nil}
-    it_redirects_to { user_path(users(:default)) }
+    it_redirects_to { forum_user_path(users(:default)) }
   end
 
   # These should definitely check the content of XML rendered at some point.
@@ -54,7 +54,7 @@ describe ModeratorshipsController, "DELETE #destroy" do
   end
 
   it_assigns :moderatorship
-  it_redirects_to { user_path(@moderatorship.user) }
+  it_redirects_to { forum_user_path(@moderatorship.user) }
   
   describe ModeratorshipsController, "(xml)" do
     define_models

@@ -38,6 +38,6 @@ class Forum < ActiveRecord::Base
   end
   
   def moderated_by?(user)
-    !!(user.forum_admin? || Moderatorship.exists?(:user_id => user.id, :forum_id => forum))    
+    !!(user.forum_admin? || Moderatorship.exists?(:user_id => user.id, :forum_id => id))    
   end
 end

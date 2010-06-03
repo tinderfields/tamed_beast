@@ -34,7 +34,8 @@ class ForumUsersController < TamedBeastController
   #   else
   #     render :action => 'new'
   #   end
-  # end                                          
+  # end
+                                         
 
   def settings
     @user = current_user

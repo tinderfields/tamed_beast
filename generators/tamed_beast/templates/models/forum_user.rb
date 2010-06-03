@@ -20,16 +20,16 @@ module ForumUser
 
        has_permalink :login
 
-       attr_readonly :posts_count, :last_seen_at  
-     }     
+       attr_readonly :posts_count, :last_seen_at
+       
+       named_scope :active, :conditions => { :state => "active" }
      
    end  
     
     module ClassMethods
-      def active
-         find_all_by_state('active')
-         User.all
-      end   
+      # def active
+      #    find_all_by_state('active')
+      # end   
     end
     
     module InstanceMethods  

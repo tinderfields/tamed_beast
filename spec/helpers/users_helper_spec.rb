@@ -24,7 +24,7 @@ describe UsersHelper do
       lambda { link_to_user(nil) }.should raise_error('Invalid user')
     end
     it "should link to the given user" do
-      should_receive(:user_path).at_least(:once).and_return('/users/1')
+      should_receive(:forum_user_path).at_least(:once).and_return('/users/1')
       link_to_user(@user).should have_tag("a[href='/users/1']")
     end
     it "should use given link text if :content_text is specified" do
@@ -84,7 +84,7 @@ describe UsersHelper do
       stub!(:current_user).and_return(@user)
     end
     it "should link to the given user" do
-      should_receive(:user_path).at_least(:once).and_return('/users/1')
+      should_receive(:forum_user_path).at_least(:once).and_return('/users/1')
       link_to_current_user().should have_tag("a[href='/users/1']")
     end
     it "should use given link text if :content_text is specified" do

@@ -113,13 +113,8 @@ class TamedBeastTables < ActiveRecord::Migration
     #   t.string   "bio"
     #   t.string   "display_name"
     #   t.string   "permalink"   
-    #   
-    #   
-    #   
-    #   
-    # 
     # end    
-    add_column :users, :state, :string, :default => "passive"
+    add_column :users, :state, :string, :default => "active"
     add_column :users, :deleted_at, :datetime
     add_column :users, :last_seen_at, :datetime
     add_column :users, :posts_count, :integer, :default => 0
