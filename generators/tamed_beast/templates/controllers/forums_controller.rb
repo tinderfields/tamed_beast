@@ -1,2 +1,2 @@
-class TamedBeast::ForumsController < ForumsController
+class TamedBeast::ForumsController < ForumsController  
 end

@@ -1,0 +1,2 @@
+class TamedBeast::MonitorshipsController < MonitorshipsController
+end
