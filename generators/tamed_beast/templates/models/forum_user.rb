@@ -32,6 +32,13 @@ module ForumUser
    end  
     
     module ClassMethods
+      def index_from(records)
+        prefetch_from(records).index_by(&:id)
+      end
+      
+      def prefetch_from(records)
+        find(:all, :select => 'distinct *', :conditions => ['id in (?)', records.collect(&:user_id).uniq])
+      end
     end
     
     module InstanceMethods  

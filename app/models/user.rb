@@ -28,13 +28,13 @@ class User < ActiveRecord::Base
      find_all_by_state('active')
   end
 
-  def self.prefetch_from(records)
-    find(:all, :select => 'distinct *', :conditions => ['id in (?)', records.collect(&:user_id).uniq])
-  end
+  # def self.prefetch_from(records)
+  #   find(:all, :select => 'distinct *', :conditions => ['id in (?)', records.collect(&:user_id).uniq])
+  # end   
   
-  def self.index_from(records)
-    prefetch_from(records).index_by(&:id)
-  end
+  # def self.index_from(records)
+  #   prefetch_from(records).index_by(&:id)
+  # end 
 
   def available_forums
     @available_forums ||= Forum.ordered - forums
