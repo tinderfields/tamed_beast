@@ -1,43 +1,34 @@
 require File.expand_path(File.dirname(__FILE__) + "/insert_commands.rb")
+require File.expand_path(File.dirname(__FILE__) + "/file_commands.rb")  
 
 class TamedBeastGenerator < Rails::Generator::Base
   def manifest
-    record do |m|    
+    record do |m|
+      
+      # Controllers
+      m.templates_from_dir "controllers", "app/controllers/tamed_beast"
       
       # Models
-      m.template  "models/forum_user.rb", "app/models/forum_user.rb"
+      m.file  "models/forum_user.rb", "app/models/forum_user.rb"
 
+      # Views
+      m.files_from_dir "views", "app/views"
+      
       # Migrations
       m.migration_template "migrations/migration.rb", "db/migrate", :migration_file_name => "tamed_beast_tables"
       
       # Views
-      pwd = Dir.pwd      
-      Dir.chdir "vendor/plugins/tamed_beast/generators/tamed_beast/templates" 
-      Dir['views/**/*'].each do |path|
-        File.directory?(path) ? (m.directory "app/" + path) : (m.template path, "app/" + path)
-      end
-      Dir.chdir pwd
-      
-      # # Layouts
-      # m.directory "app/views/layouts"
-      # m.template  "views/layouts/tamed_beast.html.erb", "app/views/layouts/tamed_beast.html.erb"
-      # m.template  "views/layouts/_tb_head.html.erb", "app/views/layouts/_tb_head.html.erb"  
+      m.files_from_dir "app", "views"
       
       # Javascripts
-      m.directory "public/javascripts"
-      m.template  "javascripts/tamed_beast.js", "public/javascripts/tamed_beast.js"
-      m.template  "javascripts/controls.js", "public/javascripts/controls.js"
-      m.template  "javascripts/dragdrop.js", "public/javascripts/dragdrop.js"
-      m.template  "javascripts/effects.js", "public/javascripts/effects.js"
-      m.template  "javascripts/lowpro.js", "public/javascripts/lowpro.js"
-      m.template  "javascripts/prototype.js", "public/javascripts/prototype.js"
+      m.files_from_dir "javascripts", "public/javascripts"
       
       # Plugins
       `cp -rf vendor/plugins/tamed_beast/vendor/plugins/* vendor/plugins/`      
       
       # Stylesheets
-      m.template  "stylesheets/tamed_beast.css", "public/stylesheets/tamed_beast.css"
-
+      m.file  "stylesheets/tamed_beast.css", "public/stylesheets/tamed_beast.css"
+      
       # Images
       m.directory "public/images"
       `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`      
@@ -45,7 +36,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       # Gem dependencies
       m.gem_dependency "RedCloth", "config.gem 'RedCloth', :lib => 'redcloth'"
       m.gem_dependency "bluecloth", "config.gem 'bluecloth'"
-      m.gem_dependency "mislav-will_paginate", "config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'"
+      m.gem_dependency "mislav-will_paginate", "config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'"                               
 
     end
   end

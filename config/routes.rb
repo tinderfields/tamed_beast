@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :moderatorships, :monitorship
   
 
-  map.resources :forums, :has_many => :posts do |forum|
+  map.resources :forums, :namespace => "tamed_beast/", :has_many => :posts do |forum|
     forum.resources :topics do |topic|
       topic.resources :posts
       topic.resource :monitorship

@@ -1,46 +1,46 @@
-<h5><%%= I18n.t 'txt.views_users.find_a_user', :default => 'Find a User' %></h5>
+<h5><%= I18n.t 'txt.views_users.find_a_user', :default => 'Find a User' %></h5>
 
-<%% form_tag forum_users_path, :method => 'get' do -%>
+<% form_tag forum_users_path, :method => 'get' do -%>
 <p>
-<label><%%= I18n.t 'txt.views_users.display_name_or_login', :default => 'Display name or login' %></label>
-<%%= text_field_tag :q, params[:q] %> 
-<%%= submit_tag I18n.t('txt.views_users.search_title', :default => "Search") %></p>
-<%% end -%>
+<label><%= I18n.t 'txt.views_users.display_name_or_login', :default => 'Display name or login' %></label>
+<%= text_field_tag :q, params[:q] %> 
+<%= submit_tag I18n.t('txt.views_users.search_title', :default => "Search") %></p>
+<% end -%>
 
-<h1 style="margin-top:0;"><%%= I18n.t 'txt.users', :default => 'Users' %></h1>
+<h1 style="margin-top:0;"><%= I18n.t 'txt.users', :default => 'Users' %></h1>
 <p class="subtitle">
-  <%%= user_count %>: <%%= active_user_count %>, <%%= lurking_user_count %>
+  <%= user_count %>: <%= active_user_count %>, <%= lurking_user_count %>
 </p>
 
-<%%= will_paginate @users %>
+<%= will_paginate @users %>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
-    <th class="la" width="88%"><%%= I18n.t 'txt.views_users.name_or_login', :default => 'Name / Login' %></th>
-	<%% if logged_in? && current_user.forum_admin? -%>
-	<th><%%= I18n.t 'txt.views_users.current_status_title', :default => "Current Status" %></th>
-	<%% end -%>
-    <th><%%= I18n.t 'txt.views_users.website_title', :default => 'Website' %></th>
-    <th width="1%"><%%= I18n.t 'txt.views_users.posts_title', :default => 'Posts' %></th>
+    <th class="la" width="88%"><%= I18n.t 'txt.views_users.name_or_login', :default => 'Name / Login' %></th>
+	<% if logged_in? && current_user.forum_admin? -%>
+	<th><%= I18n.t 'txt.views_users.current_status_title', :default => "Current Status" %></th>
+	<% end -%>
+    <th><%= I18n.t 'txt.views_users.website_title', :default => 'Website' %></th>
+    <th width="1%"><%= I18n.t 'txt.views_users.posts_title', :default => 'Posts' %></th>
   </tr>
-<%% @users.each do |user|-%>  
+<% @users.each do |user|-%>  
   <tr>
-    <td><%%= link_to h(user.display_name || user.login), forum_user_path(user), :class => (user.forum_admin? ? "forum_admin" : nil) %>
+    <td><%= link_to h(user.display_name || user.login), forum_user_path(user), :class => (user.forum_admin? ? "forum_admin" : nil) %>
       <span style="color:#666">
-      <%%= I18n.t('txt.views_users.forum_admin_in_parens', :default => "(forum_admin)") if user.forum_admin? %>
+      <%= I18n.t('txt.views_users.forum_admin_in_parens', :default => "(forum_admin)") if user.forum_admin? %>
       </span>
 	  </td>
-	<%% if logged_in? && current_user.forum_admin? -%>
-		<td><%%= user.state %></td>
-	<%% end -%>
+	<% if logged_in? && current_user.forum_admin? -%>
+		<td><%= user.state %></td>
+	<% end -%>
     <td class="la">
-      <%% unless user.website.blank? %>
-      <%%= sanitize link_to(user.website.gsub("http://",""), "http://" + user.website.gsub("http://","")) %>
-      <%% end %>
+      <% unless user.website.blank? %>
+      <%= sanitize link_to(user.website.gsub("http://",""), "http://" + user.website.gsub("http://","")) %>
+      <% end %>
     </td>
-    <td class="ca inv"><%%= user.posts.size %></td>
+    <td class="ca inv"><%= user.posts.size %></td>
   </tr>
-<%% end %>
+<% end %>
 </table>
 
-<%%= will_paginate @users %>
+<%= will_paginate @users %>

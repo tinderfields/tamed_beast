@@ -1,30 +1,30 @@
 <p>
-<label for="topic_title"><%%= I18n.t('txt.views_topics.topic', :default => 'Name') %></label><br />
-<%%= form.text_field :title, :onchange => "/*TopicForm.editNewTitle(this);*/", :class => "primary", :tabindex => 10 %>
+<label for="topic_title"><%= I18n.t('txt.views_topics.topic', :default => 'Name') %></label><br />
+<%= form.text_field :title, :onchange => "/*TopicForm.editNewTitle(this);*/", :class => "primary", :tabindex => 10 %>
 
-<%% for_moderators_of @forum do -%>
+<% for_moderators_of @forum do -%>
 <label style="margin-left:1em;">
-<%%= form.check_box :sticky %> <%%= I18n.t('txt.sticky', :default => 'sticky') %>
+<%= form.check_box :sticky %> <%= I18n.t('txt.sticky', :default => 'sticky') %>
 </label>
 
 <label style="margin-left:1em;">
-<%%= form.check_box :locked %> <%%= I18n.t('txt.locked', :default => 'locked') %>
+<%= form.check_box :locked %> <%= I18n.t('txt.locked', :default => 'locked') %>
 </label>
-<%% end -%>
+<% end -%>
 
 </p>
-<%% if @topic.new_record? -%>
+<% if @topic.new_record? -%>
 <p>
-	<label for="topic_body"><%%= I18n.t('txt.views_topics.body', :default => 'Body') %></label><br />
-	<%%= form.text_area :body, :rows => 12, :tabindex => 20 %>
+	<label for="topic_body"><%= I18n.t('txt.views_topics.body', :default => 'Body') %></label><br />
+	<%= form.text_area :body, :rows => 12, :tabindex => 20 %>
 </p>
-<%% end -%>
+<% end -%>
 
-<%% if forum_admin? && !@topic.new_record? && forums = Forum.ordered -%>
-	<%% if forums.size > 1 -%>
+<% if forum_admin? && !@topic.new_record? && forums = Forum.ordered -%>
+	<% if forums.size > 1 -%>
 <p id="topic_forum_id">
-  <label for="topic_forum_id"><%%= I18n.t('txt.forum', :default => 'Forum') %></label><br />
-  <%%= form.select :forum_id, forums.map {|x| [x.name, x.id] } %></p>
+  <label for="topic_forum_id"><%= I18n.t('txt.forum', :default => 'Forum') %></label><br />
+  <%= form.select :forum_id, forums.map {|x| [x.name, x.id] } %></p>
 </p>
-	<%% end -%>
-<%% end -%>
+	<% end -%>
+<% end -%>
