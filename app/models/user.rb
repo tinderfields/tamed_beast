@@ -20,9 +20,9 @@ class User < ActiveRecord::Base
   # 
   # attr_readonly :posts_count, :last_seen_at     
 
-  named_scope :named_like, lambda {|name|
-    { :conditions => ["users.display_name like ? or users.login like ?", 
-                        "#{name}%", "#{name}%"] }}            
+  # named_scope :named_like, lambda {|name|
+  #   { :conditions => ["users.display_name like ? or users.login like ?", 
+  #                       "#{name}%", "#{name}%"] }}            
                         
   def self.active
      find_all_by_state('active')

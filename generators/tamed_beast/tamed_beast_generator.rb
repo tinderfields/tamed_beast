@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + "/insert_commands.rb")
 
 class TamedBeastGenerator < Rails::Generator::Base
   def manifest
-    record do |m|
+    record do |m|    
       
       # Models
       m.template  "models/forum_user.rb", "app/models/forum_user.rb"
@@ -10,10 +10,18 @@ class TamedBeastGenerator < Rails::Generator::Base
       # Migrations
       m.migration_template "migrations/migration.rb", "db/migrate", :migration_file_name => "tamed_beast_tables"
       
-      # Layouts
-      m.directory "app/views/layouts"
-      m.template  "views/layouts/tamed_beast.html.erb", "app/views/layouts/tamed_beast.html.erb"
-      m.template  "views/layouts/_tb_head.html.erb", "app/views/layouts/_tb_head.html.erb"
+      # Views
+      pwd = Dir.pwd      
+      Dir.chdir "vendor/plugins/tamed_beast/generators/tamed_beast/templates" 
+      Dir['views/**/*'].each do |path|
+        File.directory?(path) ? (m.directory "app/" + path) : (m.template path, "app/" + path)
+      end
+      Dir.chdir pwd
+      
+      # # Layouts
+      # m.directory "app/views/layouts"
+      # m.template  "views/layouts/tamed_beast.html.erb", "app/views/layouts/tamed_beast.html.erb"
+      # m.template  "views/layouts/_tb_head.html.erb", "app/views/layouts/_tb_head.html.erb"  
       
       # Javascripts
       m.directory "public/javascripts"
@@ -25,14 +33,14 @@ class TamedBeastGenerator < Rails::Generator::Base
       m.template  "javascripts/prototype.js", "public/javascripts/prototype.js"
       
       # Plugins
-      `cp -rf vendor/plugins/tamed_beast/vendor/plugins/* vendor/plugins/`
+      `cp -rf vendor/plugins/tamed_beast/vendor/plugins/* vendor/plugins/`      
       
       # Stylesheets
       m.template  "stylesheets/tamed_beast.css", "public/stylesheets/tamed_beast.css"
 
       # Images
       m.directory "public/images"
-      `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`
+      `cp -rf vendor/plugins/tamed_beast/public/images/* public/images`      
       
       # Gem dependencies
       m.gem_dependency "RedCloth", "config.gem 'RedCloth', :lib => 'redcloth'"
