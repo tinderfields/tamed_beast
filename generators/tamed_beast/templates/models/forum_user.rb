@@ -23,6 +23,8 @@ module ForumUser
        attr_readonly :posts_count, :last_seen_at
        
        named_scope :active, :conditions => { :state => "active" }
+       
+     }
      
    end  
     
