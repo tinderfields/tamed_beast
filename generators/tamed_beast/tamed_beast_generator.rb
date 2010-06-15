@@ -30,6 +30,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       m.files_from_dir "images", "public/images"
       
       # Gem dependencies
+      m.reload_plugins
       m.gem_dependency "RedCloth", "config.gem 'RedCloth', :lib => 'redcloth'"
       m.gem_dependency "bluecloth", "config.gem 'bluecloth'"
       m.gem_dependency "mislav-will_paginate", "config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'"

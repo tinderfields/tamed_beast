@@ -1,5 +1,6 @@
 # require 'redcloth'
 module HtmlFormatting
+  
   protected
   
   def format_attributes

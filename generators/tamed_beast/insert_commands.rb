@@ -8,6 +8,15 @@ Rails::Generator::Commands::Create.class_eval do
     end
   end
   
+  def reload_plugins
+    logger.insert "Environment: config.reload_plugins = true if RAILS_ENV == 'development' "
+    file = "config/environment.rb"
+    
+    gsub_file file, "Rails::Initializer.run do |config|" do |match|
+      "#{match}\n  config.reload_plugins = true if RAILS_ENV == 'development'"
+    end
+  end
+  
   def model_include(model_name, include_name)
     insert_into("app/models/#{model_name}", "include #{include_name}")
   end

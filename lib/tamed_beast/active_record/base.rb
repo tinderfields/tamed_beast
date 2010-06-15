@@ -1,6 +1,6 @@
 module TamedBeast
   module ActiveRecord   
-    module Base
+    module Base   
       def self.included(base) 
         base.extend(ClassMethods)
         base.send(:include, InstanceMethods)
@@ -9,7 +9,8 @@ module TamedBeast
           cattr_accessor :white_list_sanitizer     
           self.white_list_sanitizer = HTML::WhiteListSanitizer.new
           attr_accessor :formatted_attributes
-        end  
+        end
+          
       end
   
       module ClassMethods
