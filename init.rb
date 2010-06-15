@@ -12,7 +12,7 @@ end
 # A copy of ApplicationController has been removed from the module tree but is still active!
 # A copy of TamedBeast::ActiveRecord::Base::ClassMethods has been removed from the module tree but is still active!
 # 
-# load_paths.each do |path|
-#   ActiveSupport::Dependencies.load_once_paths.delete(path)
-# end if ENV['RAILS_ENV'] != 'production'
+load_paths.each do |path|
+  ActiveSupport::Dependencies.load_once_paths.delete(path)
+end if ENV['RAILS_ENV'] != 'production' 
                                                          
