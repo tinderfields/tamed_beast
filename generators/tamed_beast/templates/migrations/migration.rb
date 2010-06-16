@@ -35,24 +35,24 @@ class TamedBeastTables < ActiveRecord::Migration
       t.boolean  "active",     :default => true
     end
 
-    create_table "open_id_authentication_associations", :force => true do |t|
-      t.binary  "server_url"
-      t.string  "handle"
-      t.binary  "secret"
-      t.integer "issued"
-      t.integer "lifetime"
-      t.string  "assoc_type"
-    end
-
-    create_table "open_id_authentication_nonces", :force => true do |t|
-      t.string  "nonce"
-      t.integer "created"
-    end
-
-    create_table "open_id_authentication_settings", :force => true do |t|
-      t.string "setting"
-      t.binary "value"
-    end
+    # create_table "open_id_authentication_associations", :force => true do |t|
+    #   t.binary  "server_url"
+    #   t.string  "handle"
+    #   t.binary  "secret"
+    #   t.integer "issued"
+    #   t.integer "lifetime"
+    #   t.string  "assoc_type"
+    # end
+    # 
+    # create_table "open_id_authentication_nonces", :force => true do |t|
+    #   t.string  "nonce"
+    #   t.integer "created"
+    # end
+    # 
+    # create_table "open_id_authentication_settings", :force => true do |t|
+    #   t.string "setting"
+    #   t.binary "value"
+    # end                          
 
     create_table "posts", :force => true do |t|
       t.integer  "user_id"
@@ -128,10 +128,38 @@ class TamedBeastTables < ActiveRecord::Migration
 
     add_index "users", ["last_seen_at"], :name => "index_users_on_last_seen_at"
     add_index "users", ["permalink"], :name => "index_users_on_permalink"
-    add_index "users", ["posts_count"], :name => "index_users_on_posts_count"   
+    add_index "users", ["posts_count"], :name => "index_users_on_posts_count"
+    
+
+    create_table :forum_attachments do |t|
+      t.references  :post
+      t.string      :file_file_name
+      t.string      :file_content_type
+      t.integer     :file_file_size
+      t.datetime    :file_updated_at
+      t.timestamps
+    end  
   end
 
   def self.down
+    drop_table :brain_busters
+    drop_table :forums
+    drop_table :moderatorships
+    drop_table :monitorships
+    drop_table :posts
+    drop_table :topics
+    drop_table :forum_attachments
+    
+    remove_column :users, :state
+    remove_column :users, :deleted_at
+    remove_column :users, :last_seen_at
+    remove_column :users, :posts_count
+    remove_column :users, :forum_admin
+    remove_column :users, :bio_html
+    remove_column :users, :website
+    remove_column :users, :bio
+    remove_column :users, :display_name
+    remove_column :users, :permalink
   end
 
 end  

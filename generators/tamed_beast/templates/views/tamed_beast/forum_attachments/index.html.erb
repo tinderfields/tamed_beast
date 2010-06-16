@@ -1,0 +1,20 @@
+<h1>Listing forum_attachments</h1>
+
+<table>
+  <tr>
+    <th>Post</th>
+  </tr>
+
+<% @forum_attachments.each do |forum_attachment| %>
+  <tr>
+    <td><%=h forum_attachment.post %></td>
+    <td><%= link_to 'Show', forum_attachment %></td>
+    <td><%= link_to 'Edit', edit_forum_attachment_path(forum_attachment) %></td>
+    <td><%= link_to 'Destroy', forum_attachment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New forum_attachment', new_forum_attachment_path %>
