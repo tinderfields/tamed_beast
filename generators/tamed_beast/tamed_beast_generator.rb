@@ -35,7 +35,7 @@ class TamedBeastGenerator < Rails::Generator::Base
       m.gem_dependency "mislav-will_paginate", "config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'"
       
       # Include in User model
-      m.model_include "user.rb", "ForumUser"                               
+      m.model_include "user.rb", "ForumUser"
 
     end
   end
