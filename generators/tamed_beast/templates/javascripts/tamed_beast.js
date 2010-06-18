@@ -57,6 +57,8 @@ var PostForm = {
 		this.cancel.attach($('edit-cancel'))
 		$('edit-form').observe('submit', function() { $('editbox_spinner').show() })
 		setTimeout("$('edit_post_body').focus()", 250)
+		// AddMoreButton.create();
+		// Attachments.delete();
   },
 
   // checks whether we're editing this post already
@@ -93,6 +95,31 @@ var RowManager = {
 };
 
 
+var AddMoreButton = Behavior.create({
+	initialize: function(){
+		$('files_button').update('<INPUT type="button" value="Add more" id="add_more_button">');
+		//AddMoreButton.click.attach($("add_more_button"));
+	},
+	
+		onclick: function(){
+			console.log($$('.forum_attachments'));
+			if($$('.forum_attachments').length < 5){
+				$("browse_buttons").insert({"bottom":'<input type="file" name="forum_attachments[]" id="forum_attachments_" class="forum_attachments"><br />'});
+			}
+			else{
+				$("add_more_button").disable();
+			}
+		}
+});
+
+function jordi(attachment_id){
+	$$('.attachment-' + attachment_id)[0].remove();
+	console.log($$("#attachments *"));
+	if($$("#attachments *").first().getAttribute("class") == "comma") $$("#attachments *").first().remove();
+	if($$("#attachments *").last().getAttribute("class") == "comma") $$("#attachments *").last().remove();
+}
+
+
 Event.addBehavior({
 	'#search, #reply': function() { this.hide() },
 	'#search-link:click': function() {
@@ -122,5 +149,9 @@ Event.addBehavior({
 	
 	'#reply-cancel': function() {
 		PostForm.cancel.attach(this)
-	}
-})
+	},
+	
+	'#files_button': AddMoreButton
+	
+});
+Event.addBehavior.reassignAfterAjax = true; 

@@ -35,10 +35,11 @@ class PostsController < TamedBeastController
 
 
   def create
-    # @post = current_user.reply @topic, params[:post][:body]
+    # @post = current_user.reply @topic, params[:post][:body] 
     @post = @current_user.posts.build(:body => params[:post][:body])
     @post.topic = @topic
     @post.forum = @topic.forum
+    @post.forum_attachments << ForumAttachment.generate(params[:forum_attachments]) if params[:forum_attachments]
 
     respond_to do |format|
       if @post.save
@@ -65,6 +66,9 @@ class PostsController < TamedBeastController
   end
 
   def update
+    
+    @post.forum_attachments << ForumAttachment.generate(params[:forum_attachments]) if params[:forum_attachments]
+    
     respond_to do |format|
       if @post.update_attributes(params[:post])
         flash[:notice] = 'Post was successfully updated.'

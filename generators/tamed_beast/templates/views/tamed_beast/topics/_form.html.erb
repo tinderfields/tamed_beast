@@ -18,7 +18,15 @@
 	<label for="topic_body"><%= I18n.t('txt.views_topics.body', :default => 'Body') %></label><br />
 	<%= form.text_area :body, :rows => 12, :tabindex => 20 %>
 </p>
+
+<div id="browse_buttons">
+	<%= file_field_tag "forum_attachments[]", :class => :forum_attachments %><br /> 
+</div>
+<br /> 
+<div id="files_button"> </div>
+<br />
 <% end -%>
+
 
 <% if forum_admin? && !@topic.new_record? && forums = Forum.ordered -%>
 	<% if forums.size > 1 -%>

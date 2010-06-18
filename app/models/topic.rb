@@ -30,7 +30,8 @@ class Topic < ActiveRecord::Base
   validates_presence_of :user_id, :forum_id, :title
   validates_presence_of :body, :on => :create
 
-  attr_accessor :body
+  attr_accessor :forum_attachments
+  attr_accessor :body               
   attr_accessible :title, :body
 
   attr_readonly :posts_count, :hits
@@ -73,10 +74,11 @@ class Topic < ActiveRecord::Base
 
 protected
   def create_initial_post
-    # user.reply self, @body #unless locked?
+    # user.reply self, @body #unless locked?   
     self.posts.create!(:body => body) do |post|
       post.user = user
       post.forum = forum
+      post.forum_attachments = ForumAttachment.generate(forum_attachments)
     end
     # post.forum = forum
     # post.save!  

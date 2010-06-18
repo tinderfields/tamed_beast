@@ -1,0 +1,4 @@
+<% unless post.forum_attachments.empty? %>Attached files: <% end %>
+<% post.forum_attachments.each do |fa| %>
+	<%= link_to fa.file_file_name, fa.file.url %><%= ", " unless fa == post.forum_attachments.last %>
+<% end %>

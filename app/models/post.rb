@@ -2,6 +2,10 @@ class Post < ActiveRecord::Base
   include User::Editable
   
   formats_attributes :body
+  
+  has_many :forum_attachments
+  
+  accepts_nested_attributes_for :forum_attachments
 
   # author of post
   belongs_to :user, :counter_cache => true

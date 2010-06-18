@@ -12,13 +12,16 @@ class ForumAttachmentsController < TamedBeastController
 
   # GET /forum_attachments/1
   # GET /forum_attachments/1.xml
-  def show
+  def show 
+    p "blaaaaaaaaaah"
     @forum_attachment = ForumAttachment.find(params[:id])
+    
+    send_data @forum_attachment.file
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @forum_attachment }
-    end
+    # respond_to do |format|
+    #   format.html # show.html.erb
+    #   format.xml  { render :xml => @forum_attachment }
+    # end  
   end
 
   # GET /forum_attachments/new
@@ -74,6 +77,7 @@ class ForumAttachmentsController < TamedBeastController
   # DELETE /forum_attachments/1
   # DELETE /forum_attachments/1.xml
   def destroy
+    logger.info("blaaaaaaaa")
     @forum_attachment = ForumAttachment.find(params[:id])
     @forum_attachment.destroy
 
