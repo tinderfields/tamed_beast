@@ -1,2 +1,2 @@
-class TamedBeast::ForumAttachmentsController < ForumsController  
+class TamedBeast::ForumAttachmentsController < ForumAttachmentsController  
 end
