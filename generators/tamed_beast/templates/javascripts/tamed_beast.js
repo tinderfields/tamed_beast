@@ -112,7 +112,7 @@ var AddMoreButton = Behavior.create({
 		}
 });
 
-function jordi(attachment_id){
+function deleteAttachment(attachment_id){
 	$$('.attachment-' + attachment_id)[0].remove();
 	console.log($$("#attachments *"));
 	if($$("#attachments *").first().getAttribute("class") == "comma") $$("#attachments *").first().remove();

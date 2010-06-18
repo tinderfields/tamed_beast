@@ -3,7 +3,7 @@
 <div id="attachments">
 	<% @post.forum_attachments.each do |fa| %>
 		<span class="attachment-<%= fa.id %>">
-			<%= fa.file_file_name %> <%= link_to_remote 'delete', :url => forum_attachment_path(fa), :update => "forum_attachments", :method => :delete, :complete => "jordi(#{fa.id})" %>
+			<%= fa.file_file_name %> <%= link_to_remote 'delete', :url => forum_attachment_path(fa), :update => "forum_attachments", :method => :delete, :complete => "deleteAttachment(#{fa.id})" %>
 		</span>
 		<%= "<span class='comma'>, </span>" unless fa == @post.forum_attachments.last %> 
 	<% end %>    
