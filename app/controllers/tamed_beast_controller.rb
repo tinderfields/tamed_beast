@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 class TamedBeastController < ApplicationController
   
-  layout 'tamed_beast'
+  layout 'application'
   
   helper :all
   helper_method :current_page, :forum_admin?, :logged_in?

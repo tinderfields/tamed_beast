@@ -23,7 +23,9 @@ class Post < ActiveRecord::Base
   after_destroy :update_cached_fields
 
   attr_accessible :body
-
+  
+  alias_attribute :to_s, :body  
+  
   def forum_name
     forum.name
   end
@@ -38,6 +40,11 @@ class Post < ActiveRecord::Base
     options[:count]      ||= {:select => "#{Post.table_name}.id"}
     paginate options
   end
+  
+  searchable do
+	  text :body	# column where to perform search 
+	  integer :id	# index
+	end
 
 protected
   def update_cached_fields

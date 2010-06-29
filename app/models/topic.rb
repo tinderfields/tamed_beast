@@ -78,7 +78,7 @@ protected
     self.posts.create!(:body => body) do |post|
       post.user = user
       post.forum = forum
-      post.forum_attachments = ForumAttachment.generate(forum_attachments)
+      post.forum_attachments = ForumAttachment.generate(forum_attachments) if forum_attachments
     end
     # post.forum = forum
     # post.save!  
@@ -117,4 +117,9 @@ protected
   def set_topic_type                                            
     # topic.sticky, topic.locked = attributes[:sticky], attributes[:locked] if is_moderator
   end
+  
+  searchable do
+	  text :title	# column where to perform search 
+	  integer :id	# index
+	end
 end

@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 
 
   map.namespace :tamed_beast, :path_prefix => '', :name_prefix => '' do |tamed_beast|
-    tamed_beast.resources :moderatorships, :monitorship
+    tamed_beast.resources :moderatorships, :monitorships
   
 
     tamed_beast.resources :forums, :has_many => :posts do |forum|
@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
     end
   
   
-    tamed_beast.resources :posts, :collection => {:search => :get}
+    tamed_beast.resources :posts #, :collection => {:search => :get}
     tamed_beast.resources :forum_users, :member => { :suspend   => :put,
                                        :settings  => :get,
                                        :make_admin => :put,
