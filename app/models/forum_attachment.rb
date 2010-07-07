@@ -31,6 +31,11 @@ class ForumAttachment < ActiveRecord::Base
     File.extname(name).gsub!('.','')
   end
   
+  searchable do
+	  text :file_file_name
+	  integer :id
+	end
+  
   protected
   
   def set_user            
