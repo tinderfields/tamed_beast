@@ -2,7 +2,8 @@
 # Likewise, all the methods added will be available for all controllers.
 class TamedBeastController < ApplicationController
   
-  layout 'application'
+  layout 'application'    
+  skip_before_filter :require_not_admin 
   
   helper :all
   helper_method :current_page, :forum_admin?, :logged_in?
