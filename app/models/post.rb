@@ -20,6 +20,7 @@ class Post < ActiveRecord::Base
   validate :topic_is_not_locked
 
   after_create  :update_cached_fields
+  after_create :create_activity
   after_destroy :update_cached_fields
 
   attr_accessible :body
@@ -28,6 +29,12 @@ class Post < ActiveRecord::Base
   
   def forum_name
     forum.name
+  end
+  
+  def create_activity
+    Activity.create(
+    :user_id => user.id, 
+    :message => "#{user.display_name} made a <a href='/forums/#{forum.permalink}/topics/#{topic.permalink}'>post</a> in #{topic.title}")
   end
 
   def self.search(query, options = {})
@@ -55,3 +62,4 @@ protected
     errors.add_to_base("Topic is locked") if topic && topic.locked? && topic.posts_count > 0
   end
 end
+
