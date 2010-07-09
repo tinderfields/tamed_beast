@@ -40,6 +40,10 @@ class TamedBeastController < ApplicationController
   
   def logged_in?
      !!current_user
+  end  
+  
+  def ensure_forum_admin
+    redirect_to forums_url unless @current_user.admin                
   end
 
 end

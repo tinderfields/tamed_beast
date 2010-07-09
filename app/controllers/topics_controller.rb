@@ -1,6 +1,8 @@
 class TopicsController < TamedBeastController  
   before_filter :find_forum
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
+  
+  before_filter :ensure_forum_admin, :except => [:index, :show, :new, :create]
 
   def index
     respond_to do |format|
@@ -69,11 +71,11 @@ class TopicsController < TamedBeastController
   end
 
   def update
-    current_user.revise @topic, params[:topic]
+    current_user.revise @topic, params[:topic] if @current_user.admin
     respond_to do |format|
       if @topic.errors.empty?
         flash[:notice] = 'Topic was successfully updated.'
-        format.html { redirect_to(forum_topic_path(@forum, @topic)) }
+        format.html { redirect_to(forum_topic_path(@topic.forum, @topic)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -99,4 +101,5 @@ protected
   def find_topic
     @topic = @forum.topics.find_by_permalink(params[:id])
   end
+
 end

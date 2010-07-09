@@ -1,7 +1,10 @@
 class ForumAttachment < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
-  has_many :stars
+  has_many :stars 
+  
+  cattr_reader :per_page
+  @@per_page = 8
   
   before_create :set_user, :if => :post_id
   
