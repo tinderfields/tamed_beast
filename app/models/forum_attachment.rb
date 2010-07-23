@@ -19,7 +19,7 @@ class ForumAttachment < ActiveRecord::Base
   end
   
   def url
-    file.url
+    file.url.gsub("%", "%25")
   end
   
   def topic

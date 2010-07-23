@@ -34,7 +34,7 @@ class Post < ActiveRecord::Base
   def create_activity
     Activity.create(
     :user_id => user.id, 
-    :message => "#{user.display_name} made a <a href='/forums/#{forum.permalink}/topics/#{topic.permalink}'>post</a> in #{topic.title}")
+    :message => "<a href='/users/#{user.id}'>#{user.display_name}</a> wrote a post in the topic <a href='/forums/#{forum.permalink}/topics/#{topic.permalink}#post_#{id}'>#{topic}</a>")
   end
 
   def self.search(query, options = {})
