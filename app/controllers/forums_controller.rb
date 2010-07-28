@@ -8,7 +8,7 @@ class ForumsController < TamedBeastController
     # reset the page of each forum we have visited when we go back to index
     session[:forums_page] = nil
 
-    @forums = Forum.all # ordered?
+    @forums = Forum.find(:all, :order => 'position') # ordered?
 
     respond_to do |format|
       format.html # index.html.erb
