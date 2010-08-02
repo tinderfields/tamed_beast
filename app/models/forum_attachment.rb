@@ -10,6 +10,10 @@ class ForumAttachment < ActiveRecord::Base
   
   has_attached_file :file
   
+  named_scope :documents, :conditions => ['forum_id IS NOT NULL']
+  belongs_to :document_forum, :class_name => 'Forum', :foreign_key => :forum_id
+  
+  
   def self.generate(forum_attachments)
     forum_attachments.select{ |fa| !fa.nil? }.map{ |fa| ForumAttachment.new(:file => fa) }
   end
