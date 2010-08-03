@@ -1,7 +1,7 @@
 class ForumAttachment < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
-  has_many :stars 
+  has_many :stars, :dependent => :destroy 
   
   cattr_reader :per_page
   @@per_page = 8
