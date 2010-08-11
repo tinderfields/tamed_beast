@@ -11,6 +11,7 @@ class ForumAttachment < ActiveRecord::Base
   has_attached_file :file
   
   named_scope :documents, :conditions => ['forum_id IS NOT NULL']
+  named_scope :by_forum, lambda{ |forum_id| { :conditions => { :forum_id => forum_id || Forum.all.map(&:id) } } }
   belongs_to :document_forum, :class_name => 'Forum', :foreign_key => :forum_id
   
   
