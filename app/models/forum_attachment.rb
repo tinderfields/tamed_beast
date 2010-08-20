@@ -2,17 +2,18 @@ class ForumAttachment < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
   has_many :stars, :dependent => :destroy 
+  belongs_to :document_forum, :class_name => 'Forum', :foreign_key => :forum_id
   
   cattr_reader :per_page
   @@per_page = 8
   
   before_create :set_user, :if => :post_id
+  after_save   :set_forum_id
   
   has_attached_file :file
   
   named_scope :documents, :conditions => ['forum_id IS NOT NULL']
-  named_scope :by_forum, lambda{ |forum_id| { :conditions => { :forum_id => forum_id || Forum.all.map(&:id) } } }
-  belongs_to :document_forum, :class_name => 'Forum', :foreign_key => :forum_id
+  named_scope :by_forum, lambda{ |forum_id| { :conditions => { :forum_id => forum_id || Forum.all.map(&:id) } } }  
   
   
   def self.generate(forum_attachments)
@@ -48,6 +49,10 @@ class ForumAttachment < ActiveRecord::Base
   
   def set_user            
     self.user_id = self.post.user_id
+  end
+  
+  def set_forum_id
+    self.forum_id = self.post.forum_id if self.post && !self.forum_id
   end
       
 end
