@@ -52,7 +52,6 @@ class ForumAttachment < ActiveRecord::Base
   end
   
   def set_forum_id
-    self.forum_id = self.post.forum_id if self.post && !self.forum_id
-  end
-      
+    already_set_forum_id = update_attribute(:forum_id, self.post.forum_id) if self.post && !self.forum_id && !already_set_forum_id
+  end      
 end
