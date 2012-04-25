@@ -42,7 +42,7 @@ module TamedBeast
       end
 
       def avatar_for(user, size=32)
-        image_tag user.small_picture, :size => "#{size}x#{size}", :class => 'photo'
+        image_tag(user.small_picture, :size => "#{size}x#{size}", :class => 'photo') if user
       end
 
       def search_path(atom = false)
